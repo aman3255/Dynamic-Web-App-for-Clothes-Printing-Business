@@ -1,0 +1,4 @@
+
+# === For Backend ===
+node_modules/
+.env
