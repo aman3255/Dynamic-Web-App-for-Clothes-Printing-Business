@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-smoke: #F7F4F3;
+  --color-wine: #5B2333;
+}
+
+body {
+  background-color: var(--color-smoke);
+}

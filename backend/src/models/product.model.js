@@ -1,31 +1,52 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const productSchema = new mongoose.Schema({
+const ProductSchema = new Schema({
     name: {
-        type: String,
+        type: String, // "Classic Cotton T-Shirt" or "Premium Canvas Tote Bag".
         required: true,
+        trim: true
     },
     category: {
         type: String,
-        enum: [
-            'Polo T-Shirts', 'Packaging Labels', 'Booklets', 'Stickers', 'Cards',
-            'Acrylic Prints', 'Flyers', 'Certificates', 'ID Cards', 'Tote Bags',
-            'Brochures', 'Banners'
-        ],
         required: true,
+        enum: ['tshirt', 'bag', 'award', 'bottle', 'packaging', 'photo', 'sticker', 'idcard', 'banner'],
+        index: true
     },
     description: {
         type: String,
+        required: true
     },
     basePrice: {
         type: Number,
         required: true,
+        min: 0
     },
-    mockupTemplateUrl: {
-        type: String, // Optional URL for design preview templates
+    images: [{
+        type: String, // URLs to product images in Cloudinary
+        required: true
+    }],
+    variants: [{
+        name: String, // e.g., "Size", "Color"
+        options: [String] // e.g., ["S", "M", "L"] or ["Red", "Blue"]
+    }],
+    isActive: {
+        type: Boolean,
+        default: true
     },
-    availableSizes: [String], // e.g., ['S', 'M', 'L', 'XL']
-    availableColors: [String], // e.g., ['Red', 'Blue', 'Black']
-}, { timestamps: true });
+    printingArea: {
+        width: Number, // in cm or inches
+        height: Number
+    },
+    minOrderQuantity: {
+        type: Number,
+        default: 1,
+        min: 1
+    }
+}, {
+    timestamps: true
+});
 
-export default mongoose.model('Product', productSchema);
+const ProductModel = mongoose.model('products', ProductSchema);
+
+module.exports = ProductModel;
