@@ -6,54 +6,87 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-white text-wine">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-xl font-bold text-white mb-4">CustomCraft</h3>
+            <h3 className="text-xl font-bold text-wine mb-4">Pixora</h3>
             <p className="mb-4">
               Your one-stop shop for high-quality customizable products. Design and order your unique items with ease.
             </p>
+
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Instagram size={20} />
-              </a>
+              {/* Facebook */}
+              <div className="relative group inline-block">
+                <a
+                  href="#"
+                  className="text-wine transition-transform duration-200 hover:scale-110 hover:font-semibold hover:text-wine cursor-pointer"
+                >
+                  <Facebook size={20} />
+                </a>
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max px-3 py-1 text-sm text-white bg-wine rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                  Pixora Facebook available soon. Stay tuned!
+                </div>
+              </div>
+
+              {/* Twitter */}
+              <div className="relative group inline-block">
+                <a
+                  href="#"
+                  className="text-wine transition-transform duration-200 hover:scale-110 hover:font-semibold hover:text-wine cursor-pointer"
+                >
+                  <Twitter size={20} />
+                </a>
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max px-3 py-1 text-sm text-white bg-wine rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                  Pixora Twitter available soon. Stay tuned!
+                </div>
+              </div>
+
+              {/* Instagram */}
+              <div className="relative group inline-block">
+                <a
+                  href="#"
+                  className="text-wine transition-transform duration-200 hover:scale-110 hover:font-semibold hover:text-wine cursor-pointer"
+                >
+                  <Instagram size={20} />
+                </a>
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max px-3 py-1 text-sm text-white bg-wine rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                  Pixora Instagram available soon. Stay tuned!
+                </div>
+              </div>
             </div>
           </div>
 
+
+
+
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-wine mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="hover:text-white transition-colors">
+                <Link to="/" className="hover:text-wine text-wine hover:wine transition-colors transition-transform duration-200 hover:scale-105 hover:font-semibold cursor-pointer transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/products" className="hover:text-white transition-colors">
+                <Link to="/products" className="hover:text-wine text-wine hover:wine transition-colors transition-transform duration-200 hover:scale-105 hover:font-semibold cursor-pointer transition-colors">
                   Products
                 </Link>
               </li>
               <li>
-                <Link to="/orders" className="hover:text-white transition-colors">
+                <Link to="/orders" className="hover:text-wine text-wine hover:wine transition-colors transition-transform duration-200 hover:scale-105 hover:font-semibold cursor-pointer transition-colors">
                   My Orders
                 </Link>
               </li>
               <li>
-                <Link to="/cart" className="hover:text-white transition-colors">
+                <Link to="/cart" className="hover:text-wine text-wine hover:wine transition-colors transition-transform duration-200 hover:scale-105 hover:font-semibold cursor-pointer transition-colors">
                   Cart
                 </Link>
               </li>
               <li>
-                <Link to="/profile" className="hover:text-white transition-colors">
+                <Link to="/profile" className="hover:text-wine text-wine hover:wine transition-colors transition-transform duration-200 hover:scale-105 hover:font-semibold cursor-pointer transition-colors">
                   My Account
                 </Link>
               </li>
@@ -62,30 +95,30 @@ const Footer: React.FC = () => {
 
           {/* Products */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Products</h3>
+            <h3 className="text-lg font-semibold text-wine mb-4">Products</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/products/t-shirts" className="hover:text-white transition-colors">
+                <Link to="/products/t-shirts" className="hover:text-wine transition-colors transition-transform duration-200 hover:scale-105 hover:font-semibold cursor-pointer">
                   T-shirts
                 </Link>
               </li>
               <li>
-                <Link to="/products/bags" className="hover:text-white transition-colors">
+                <Link to="/products/bags" className="hover:text-wine transition-colors transition-transform duration-200 hover:scale-105 hover:font-semibold cursor-pointer">
                   Bags
                 </Link>
               </li>
               <li>
-                <Link to="/products/awards" className="hover:text-white transition-colors">
+                <Link to="/products/awards" className="hover:text-wine transition-colors transition-transform duration-200 hover:scale-105 hover:font-semibold cursor-pointer">
                   Awards
                 </Link>
               </li>
               <li>
-                <Link to="/products/bottles" className="hover:text-white transition-colors">
+                <Link to="/products/bottles" className="hover:text-wine transition-colors transition-transform duration-200 hover:scale-105 hover:font-semibold cursor-pointer">
                   Bottles
                 </Link>
               </li>
               <li>
-                <Link to="/products/stickers" className="hover:text-white transition-colors">
+                <Link to="/products/stickers" className="hover:text-wine transition-colors transition-transform duration-200 hover:scale-105 hover:font-semibold cursor-pointer">
                   Stickers
                 </Link>
               </li>
@@ -94,26 +127,26 @@ const Footer: React.FC = () => {
 
           {/* Contact Information */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Contact Us</h3>
+            <h3 className="text-lg font-semibold text-wine mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin size={20} className="mr-2 mt-1 flex-shrink-0" />
-                <span>123 Print Street, Design City, DC 12345</span>
+                <span>QJ8H+7G7, Vaderamanchana Halli, Bengaluru, Karnataka 560105, India</span>
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="mr-2 flex-shrink-0" />
-                <span>(123) 456-7890</span>
+                <span>+91 8858824642</span>
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="mr-2 flex-shrink-0" />
-                <span>info@customcraft.com</span>
+                <span>support@pixora.com</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p>© {currentYear} CustomCraft. All rights reserved.</p>
+          <p>© {currentYear} Pixora. All rights reserved.</p>
         </div>
       </div>
     </footer>

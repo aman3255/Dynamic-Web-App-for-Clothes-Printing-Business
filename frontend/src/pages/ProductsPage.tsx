@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Filter, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
 import Input from '../components/Input';
@@ -20,22 +20,23 @@ const ProductsPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [showFilters, setShowFilters] = useState(false);
+  // const [showFilters, setShowFilters] = useState(false);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
   const [sortOption, setSortOption] = useState('');
+  const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
         let response;
-        
+
         if (category) {
           response = await api.getProductsByCategory(category);
         } else {
           response = await api.getProducts();
         }
-        
+
         setProducts(response.data);
         setLoading(false);
       } catch (err) {
@@ -48,9 +49,8 @@ const ProductsPage: React.FC = () => {
     fetchProducts();
   }, [category]);
 
-  const toggleFilters = () => {
-    setShowFilters(!showFilters);
-  };
+  // const toggleFilters = () => setShowFilters(!showFilters);
+  const toggleSearch = () => setShowSearch((prev) => !prev);
 
   const handlePriceChange = (index: number, value: number) => {
     const newRange = [...priceRange] as [number, number];
@@ -59,23 +59,18 @@ const ProductsPage: React.FC = () => {
   };
 
   const filteredProducts = products
-    .filter(product => 
+    .filter(product =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.description.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .filter(product => 
+    .filter(product =>
       product.price >= priceRange[0] && product.price <= priceRange[1]
     )
     .sort((a, b) => {
-      if (sortOption === 'price-asc') {
-        return a.price - b.price;
-      } else if (sortOption === 'price-desc') {
-        return b.price - a.price;
-      } else if (sortOption === 'name-asc') {
-        return a.name.localeCompare(b.name);
-      } else if (sortOption === 'name-desc') {
-        return b.name.localeCompare(a.name);
-      }
+      if (sortOption === 'price-asc') return a.price - b.price;
+      if (sortOption === 'price-desc') return b.price - a.price;
+      if (sortOption === 'name-asc') return a.name.localeCompare(b.name);
+      if (sortOption === 'name-desc') return b.name.localeCompare(a.name);
       return 0;
     });
 
@@ -92,14 +87,13 @@ const ProductsPage: React.FC = () => {
     { name: 'Banners', path: '/products/banners' },
   ];
 
-  // If we need to fall back to demo products when API doesn't return any
-  const demoProducts = [
+  const demoProducts: Product[] = [
     {
       id: '1',
       name: 'Premium Custom T-Shirt',
       description: 'High-quality cotton t-shirt with your custom design',
       price: 24.99,
-      image: 'https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: 'https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg',
       category: 'T-shirts',
     },
     {
@@ -107,54 +101,53 @@ const ProductsPage: React.FC = () => {
       name: 'Custom Canvas Tote Bag',
       description: 'Durable canvas tote bag perfect for your design',
       price: 19.99,
-      image: 'https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: 'https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg',
       category: 'Bags',
     },
-    // Add more demo products as needed
   ];
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          {category 
-            ? `${category.charAt(0).toUpperCase() + category.slice(1)}` 
-            : 'All Products'}
+        <h1 className="text-3xl font-bold text-wine mb-2">
+          {category ? `${category.charAt(0).toUpperCase() + category.slice(1)}` : 'All Products'}
         </h1>
-        <p className="text-gray-600">
-          Choose from our range of high-quality customizable products
-        </p>
+        <p className="text-gray-600">Choose from our range of high-quality customizable products</p>
       </div>
 
       <div className="flex flex-col md:flex-row gap-8">
-        {/* Sidebar / Filters */}
-        <div className="w-full md:w-64 flex-shrink-0">
-          <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-            <div className="mb-4">
-              <div className="relative">
+        {/* Sidebar */}
+        <div className={`w-full md:w-64 flex-shrink-0 ${showSearch ? 'hidden md:block' : ''}`}>
+          <div className="bg-white rounded-lg shadow-md p-6 mb-5">
+            <div className="mb-10 relative">
+              {showSearch && (
                 <Input
                   type="text"
                   placeholder="Search products..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  fullWidth
+                  className="transition-all duration-300 ease-in-out w-full pr-10"
                 />
-                <Search className="absolute right-3 top-3 text-gray-400" size={18} />
-              </div>
+              )}
+              <Search
+                className="absolute right-3 top-3 text-gray-400 cursor-pointer"
+                size={18}
+                onClick={toggleSearch}
+              />
             </div>
 
-            <div className="mb-6">
-              <h3 className="font-semibold text-gray-900 mb-3">Categories</h3>
+            <div className="mb-5">
+              <h3 className="font-semibold text-gray-900 mb-4">Categories</h3>
               <div className="space-y-2">
                 {categories.map((cat) => (
                   <a
                     key={cat.path}
                     href={cat.path}
                     className={`block py-1 px-2 rounded-md text-sm ${
-                      (category === undefined && cat.name === 'All Products') ||
+                      (!category && cat.name === 'All Products') ||
                       (category && cat.path.includes(category))
-                        ? 'bg-blue-100 text-blue-700 font-medium'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-[#F5E6EA] text-[#722F37] font-medium'
+                        : 'text-gray-700 hover:bg-[#F5E6EA] hover:text-[#722F37]'
                     }`}
                   >
                     {cat.name}
@@ -173,7 +166,7 @@ const ProductsPage: React.FC = () => {
                     max="100"
                     value={priceRange[0]}
                     onChange={(e) => handlePriceChange(0, parseInt(e.target.value))}
-                    className="w-full"
+                    className="w-full accent-[#722F37]"
                   />
                   <input
                     type="range"
@@ -181,7 +174,7 @@ const ProductsPage: React.FC = () => {
                     max="100"
                     value={priceRange[1]}
                     onChange={(e) => handlePriceChange(1, parseInt(e.target.value))}
-                    className="w-full"
+                    className="w-full accent-[#722F37]"
                   />
                 </div>
                 <div className="flex justify-between">
@@ -210,24 +203,6 @@ const ProductsPage: React.FC = () => {
 
         {/* Product Grid */}
         <div className="flex-grow">
-          {/* Mobile Filter Button */}
-          <div className="md:hidden mb-4">
-            <button
-              onClick={toggleFilters}
-              className="flex items-center bg-white rounded-md shadow px-4 py-2 text-gray-700"
-            >
-              <Filter size={16} className="mr-2" />
-              <span>Filters</span>
-            </button>
-          </div>
-
-          {/* Mobile Filters Dropdown */}
-          {showFilters && (
-            <div className="md:hidden bg-white rounded-lg shadow-md p-4 mb-4">
-              {/* Mobile filters content */}
-            </div>
-          )}
-
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
@@ -239,39 +214,20 @@ const ProductsPage: React.FC = () => {
           ) : filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  name={product.name}
-                  description={product.description}
-                  price={product.price}
-                  image={product.image}
-                  category={product.category}
-                />
+                <ProductCard key={product.id} {...product} />
               ))}
             </div>
           ) : products.length > 0 ? (
             <div className="text-center py-12">
               <h3 className="text-xl font-medium text-gray-900 mb-2">No matching products</h3>
-              <p className="text-gray-600">
-                Try adjusting your search or filters to find what you're looking for.
-              </p>
+              <p className="text-gray-600">Try adjusting your search or filters to find what you're looking for.</p>
             </div>
           ) : (
-            // Show demo products as fallback if API returns nothing
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {demoProducts
-                .filter(product => !category || product.category.toLowerCase() === category.toLowerCase())
-                .map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    id={product.id}
-                    name={product.name}
-                    description={product.description}
-                    price={product.price}
-                    image={product.image}
-                    category={product.category}
-                  />
+                .filter(p => !category || p.category.toLowerCase() === category.toLowerCase())
+                .map(product => (
+                  <ProductCard key={product.id} {...product} />
                 ))}
             </div>
           )}

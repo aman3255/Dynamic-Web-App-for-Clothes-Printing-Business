@@ -16,6 +16,7 @@ import OrdersPage from './pages/OrdersPage';
 import OrderDetailPage from './pages/OrderDetailPage';
 import ProfilePage from './pages/ProfilePage';
 import PrivateRoute from './components/PrivateRoute';
+import HowItWorks from './pages/HowItWorks';
 //
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/HowItWorks" element={<HowItWorks />} />
                 <Route 
                   path="/checkout" 
                   element={

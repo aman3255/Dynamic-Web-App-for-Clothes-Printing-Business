@@ -6,7 +6,7 @@ import api from '../services/api';
 import { useCart, CartItem } from '../contexts/CartContext';
 import Button from '../components/Button';
 import FileUpload from '../components/FileUpload';
-import Input from '../components/Input';
+// import Input from '../components/Input';
 import toast from 'react-hot-toast';
 
 interface Product {

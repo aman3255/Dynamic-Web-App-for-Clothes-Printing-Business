@@ -94,8 +94,8 @@ const FileUpload: React.FC<FileUploadProps> = ({
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         className={`border-2 border-dashed rounded-md p-4 text-center cursor-pointer transition-colors 
-        ${fileName ? 'border-green-500 bg-green-50' : 'border-gray-300 hover:border-blue-500 hover:bg-blue-50'}
-        ${error ? 'border-red-500 bg-red-50' : ''}`}
+          ${fileName ? 'border-green-500 bg-green-50' : 'border-gray-300 hover:border-wine hover:bg-wine/10'}
+          ${error ? 'border-red-500 bg-red-50' : ''}`}
         onClick={() => fileInputRef.current?.click()}
       >
         <input
@@ -111,12 +111,12 @@ const FileUpload: React.FC<FileUploadProps> = ({
             <img src={preview} alt="Preview" className="max-h-48 mx-auto rounded-md" />
           </div>
         ) : (
-          <Upload className="mx-auto h-12 w-12 text-gray-400" />
+          <Upload className="mx-auto h-12 w-12 text-wine" />
         )}
         
         {fileName ? (
           <div className="mt-2">
-            <p className="text-sm font-medium text-gray-900">{fileName}</p>
+            <p className="text-sm font-medium text-wine">{fileName}</p>
             <button
               type="button"
               onClick={(e) => {
@@ -131,10 +131,10 @@ const FileUpload: React.FC<FileUploadProps> = ({
           </div>
         ) : (
           <div className="mt-2">
-            <p className="text-sm font-medium text-gray-900">
+            <p className="text-sm font-medium text-wine">
               Drag and drop or click to upload
             </p>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-wine mt-1">
               {accept === 'image/*' 
                 ? 'PNG, JPG, GIF up to 10MB' 
                 : 'Upload your design file'}

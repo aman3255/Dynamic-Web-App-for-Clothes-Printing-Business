@@ -1,46 +1,66 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShoppingBag, Award, PencilRuler } from 'lucide-react';
-import api from '../services/api';
-import ProductCard from '../components/ProductCard';
+import {  ShoppingBag, Award, PencilRuler } from 'lucide-react';
+// import api from '../services/api';
 import Button from '../components/Button';
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  category: string;
-}
+import HeroCarousel from '../components/HeroCarousel';
 
 const HomePage: React.FC = () => {
-  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchFeaturedProducts = async () => {
-      try {
-        const response = await api.getProducts();
-        setFeaturedProducts(response.data.slice(0, 4));
-      } catch (err) {
-        console.error('Failed to fetch featured products:', err);
-        setFeaturedProducts([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFeaturedProducts();
-  }, []);
-
   const categories = [
-    { name: 'T-shirts', path: '/products/t-shirts', image: 'https://images.pexels.com/photos/6347888/pexels-photo-6347888.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' },
-    { name: 'Bags', path: '/products/bags', image: 'https://images.pexels.com/photos/934063/pexels-photo-934063.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' },
-    { name: 'Awards', path: '/products/awards', image: 'https://images.pexels.com/photos/6332747/pexels-photo-6332747.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' },
-    { name: 'Bottles', path: '/products/bottles', image: 'https://images.pexels.com/photos/1342529/pexels-photo-1342529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' },
-    { name: 'Stickers', path: '/products/stickers', image: 'https://images.pexels.com/photos/5433010/pexels-photo-5433010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' },
+    {
+      name: 'T-shirts',
+      image: 'https://images.pexels.com/photos/6347888/pexels-photo-6347888.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      path: '/products/t-shirts',
+      description: 'Custom designed t-shirts for any occasion'
+    },
+    {
+      name: 'Bags',
+      image: 'https://images.pexels.com/photos/934063/pexels-photo-934063.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      path: '/products/bags',
+      description: 'Stylish and durable custom bags'
+    },
+    {
+      name: 'Awards',
+      image: 'https://images.pexels.com/photos/6332747/pexels-photo-6332747.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      path: '/products/awards',
+      description: 'Personalized awards and trophies'
+    },
+    {
+      name: 'Bottles',
+      image: 'https://images.pexels.com/photos/1342529/pexels-photo-1342529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      path: '/products/bottles',
+      description: 'Custom water bottles and drinkware'
+    },
+    {
+      name: 'Packaging',
+      image: 'https://images.pexels.com/photos/7319097/pexels-photo-7319097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      path: '/products/packaging',
+      description: 'Branded packaging solutions'
+    },
+    {
+      name: 'Photo Gifts',
+      image: 'https://images.pexels.com/photos/1109543/pexels-photo-1109543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      path: '/products/photo-gifts',
+      description: 'Personalized photo gifts and keepsakes'
+    },
+    {
+      name: 'Stickers',
+      image: 'https://images.pexels.com/photos/5433010/pexels-photo-5433010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      path: '/products/stickers',
+      description: 'Custom stickers and labels'
+    },
+    {
+      name: 'ID Cards',
+      image: 'https://images.pexels.com/photos/6120214/pexels-photo-6120214.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      path: '/products/id-cards',
+      description: 'Professional ID cards and badges'
+    },
+    {
+      name: 'Banners',
+      image: 'https://images.pexels.com/photos/7319179/pexels-photo-7319179.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      path: '/products/banners',
+      description: 'Custom banners for any event'
+    }
   ];
 
   const testimonials = [
@@ -69,32 +89,8 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="relative bg-hero-pattern bg-cover bg-center">
-        <div className="absolute inset-0 bg-wine/80"></div>
-        <div className="container mx-auto px-4 py-32 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-smoke">
-              Design & Create Your Own Custom Products
-            </h1>
-            <p className="text-xl mb-8 text-smoke/90">
-              Upload your designs and we'll bring them to life on high-quality customizable products.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/products">
-                <Button variant="secondary" size="lg" className="bg-smoke text-wine hover:bg-smoke/90">
-                  Browse Products
-                </Button>
-              </Link>
-              <Link to="/login">
-                <Button variant="outline" size="lg" className="border-smoke text-smoke hover:bg-smoke/10">
-                  Get Started
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Carousel */}
+      <HeroCarousel />
 
       {/* How It Works Section */}
       <section className="py-16 bg-smoke">
@@ -140,110 +136,90 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Featured Products Section */}
+      {/* Popular Categories Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-wine">Featured Products</h2>
-            <Link to="/products" className="flex items-center text-wine hover:text-wine/80">
-              View all products <ArrowRight size={16} className="ml-1" />
-            </Link>
-          </div>
-
-          {loading ? (
-            <div className="flex justify-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-wine"></div>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {featuredProducts.length > 0 ? (
-                featuredProducts.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    id={product.id}
-                    name={product.name}
-                    description={product.description}
-                    price={product.price}
-                    image={product.image}
-                    category={product.category}
-                  />
-                ))
-              ) : (
-                <>
-                  <ProductCard
-                    id="1"
-                    name="Premium Custom T-Shirt"
-                    description="High-quality cotton t-shirt with your custom design"
-                    price={24.99}
-                    image="https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    category="T-shirts"
-                  />
-                  <ProductCard
-                    id="2"
-                    name="Custom Canvas Tote Bag"
-                    description="Durable canvas tote bag perfect for your design"
-                    price={19.99}
-                    image="https://images.pexels.com/photos/934063/pexels-photo-934063.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    category="Bags"
-                  />
-                  <ProductCard
-                    id="3"
-                    name="Personalized Crystal Award"
-                    description="Elegant crystal award with custom engraving"
-                    price={49.99}
-                    image="https://images.pexels.com/photos/6332747/pexels-photo-6332747.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    category="Awards"
-                  />
-                  <ProductCard
-                    id="4"
-                    name="Custom Water Bottle"
-                    description="Stainless steel water bottle with your logo"
-                    price={29.99}
-                    image="https://images.pexels.com/photos/1342529/pexels-photo-1342529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    category="Bottles"
-                  />
-                </>
-              )}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Categories Section */}
-      <section className="py-16 bg-smoke">
-        <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-wine mb-4">Browse Categories</h2>
+            <h2 className="text-3xl font-bold text-wine mb-4">Popular Categories</h2>
             <p className="text-lg text-wine/80 max-w-2xl mx-auto">
               Explore our range of customizable products
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category) => (
-              <Link
+              <div 
                 key={category.path}
-                to={category.path}
-                className="group relative overflow-hidden rounded-lg shadow-md aspect-square"
+                className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
-                <img
-                  src={category.image}
-                  alt={category.name}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-wine/80 via-wine/20 to-transparent flex items-end">
-                  <div className="p-4 w-full">
-                    <h3 className="text-smoke text-xl font-bold">{category.name}</h3>
-                  </div>
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
                 </div>
-              </Link>
+                <div className="absolute inset-0 bg-gradient-to-t from-wine/90 via-wine/40 to-transparent flex flex-col justify-end p-6">
+                  <h3 className="text-2xl font-bold text-smoke mb-2">{category.name}</h3>
+                  <p className="text-smoke/90 mb-4">{category.description}</p>
+                  <Link to={category.path}>
+                    <Button 
+                      variant="secondary"
+                      className="bg-smoke text-wine hover:bg-smoke/90 transition-colors"
+                    >
+                      Shop Now
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Trusted By Section */}
       <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-wine mb-2">Trusted By Over 350 Large Enterprises</h2>
+            <p className="text-wine text-lg">For their Printing, Signage, and Gifting needs</p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center justify-items-center mb-10">
+            {/* Company Logos */}
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Facebook_f_Logo_%282019%29.svg/1200px-Facebook_f_Logo_%282019%29.svg.png" 
+                alt="Facebook" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+            
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png" 
+                alt="Microsoft" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+            
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png" 
+                alt="Google" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+            
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/2560px-Paytm_Logo_%28standalone%29.svg.png" 
+                alt="Paytm" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+            
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Uber_App_Icon.svg/2048px-Uber_App_Icon.svg.png" 
+                alt="Uber" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+            
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" 
+                alt="Zaalima" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+            
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" 
+                alt="Amazon" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+          </div>
+          
+          <div className="text-center">
+            <Button  size="lg" className="bg-brand-wine hover:bg-opacity-90">
+              <Link to="/register">Get in Touch</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+
+      {/* Testimonials Section */}
+      <section className="py-16 bg-smoke">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-wine mb-4">What Our Customers Say</h2>
@@ -254,7 +230,7 @@ const HomePage: React.FC = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="bg-smoke p-6 rounded-lg shadow-md">
+              <div key={testimonial.id} className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex items-center mb-4">
                   <img
                     src={testimonial.avatar}
