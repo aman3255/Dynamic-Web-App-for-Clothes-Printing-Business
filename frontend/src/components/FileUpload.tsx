@@ -26,11 +26,11 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    
+
     if (file) {
       setFileName(file.name);
       onFileChange(file);
-      
+
       // Create preview for image files
       if (file.type.startsWith('image/')) {
         const reader = new FileReader();
@@ -59,13 +59,13 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    
+
     if (e.dataTransfer.files?.length) {
       const file = e.dataTransfer.files[0];
       if (fileInputRef.current) {
         // Not directly settable, but we'll update the state
         setFileName(file.name);
-        
+
         // Create preview for image files
         if (file.type.startsWith('image/')) {
           const reader = new FileReader();
@@ -76,7 +76,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
         } else {
           setPreview(null);
         }
-        
+
         onFileChange(file);
       }
     }
@@ -89,7 +89,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
           {label}
         </label>
       )}
-      
+
       <div
         onDragOver={handleDragOver}
         onDrop={handleDrop}
@@ -105,7 +105,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
           accept={accept}
           className="hidden"
         />
-        
+
         {preview ? (
           <div className="mb-3">
             <img src={preview} alt="Preview" className="max-h-48 mx-auto rounded-md" />
@@ -113,7 +113,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
         ) : (
           <Upload className="mx-auto h-12 w-12 text-wine" />
         )}
-        
+
         {fileName ? (
           <div className="mt-2">
             <p className="text-sm font-medium text-wine">{fileName}</p>
@@ -135,17 +135,18 @@ const FileUpload: React.FC<FileUploadProps> = ({
               Drag and drop or click to upload
             </p>
             <p className="text-xs text-wine mt-1">
-              {accept === 'image/*' 
-                ? 'PNG, JPG, GIF up to 10MB' 
+              {accept === 'image/*'
+                ? 'PNG, JPG, GIF up to 10MB'
                 : 'Upload your design file'}
             </p>
           </div>
         )}
       </div>
-      
+
       {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
     </div>
   );
 };
 
 export default FileUpload;
+

@@ -8,28 +8,28 @@ import Button from './Button';
 
 const slides = [
   {
+    title: 'Custom Water Bottles',
+    description: 'Create custom water bottles that stand out. Ideal for sports teams, corporate gifts, or personal use.',
+    image: 'https://i.pinimg.com/736x/4d/59/9b/4d599baad54ab2014dd9bdd37ee2f194.jpg',
+    link: '/products/bottles',
+  },
+  {
     title: 'Custom T-Shirts',
     description: 'Create your unique style with our premium quality custom t-shirts. Perfect for teams, events, or personal wear.',
-    image: 'https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    image: 'https://media.istockphoto.com/id/1226825218/photo/where-technology-and-craftsmanship-meet-creative-people-trying-on-stickers-with-text-while.webp?s=2048x2048&w=is&k=20&c=PECYC1i2hcT9B2hs0JUbGyQcEfRNKBKaGo1cZ9TfIDs=',
     link: '/products/t-shirts',
   },
   {
-    title: 'Tote Bags',
+    title: 'Custom Tote Bags',
     description: 'Design eco-friendly tote bags that make a statement. Ideal for shopping, promotions, or daily use.',
-    image: 'https://images.pexels.com/photos/934063/pexels-photo-934063.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    image: 'https://media.istockphoto.com/id/1224684064/photo/everything-to-market-your-business-cropped-shot-of-female-worker-posing-with-custom-shopper.webp?s=2048x2048&w=is&k=20&c=25gu8Le0W7404XgzEup21S407OH2yAurnfwPDyYt16M=',
     link: '/products/bags',
   },
   {
     title: 'Custom Awards',
     description: 'Celebrate achievements with personalized awards. Perfect for recognizing excellence and special occasions.',
-    image: 'https://images.pexels.com/photos/6332747/pexels-photo-6332747.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    image: 'https://images.pexels.com/photos/776527/pexels-photo-776527.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     link: '/products/awards',
-  },
-  {
-    title: 'Water Bottles',
-    description: 'Create custom water bottles that stand out. Ideal for sports teams, corporate gifts, or personal use.',
-    image: 'https://images.pexels.com/photos/1342529/pexels-photo-1342529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    link: '/products/bottles',
   },
 ];
 

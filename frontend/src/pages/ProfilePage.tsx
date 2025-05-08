@@ -12,7 +12,7 @@ const ProfilePage: React.FC = () => {
   
   const [activeTab, setActiveTab] = useState<'profile' | 'security'>('profile');
   const [formData, setFormData] = useState({
-    name: user?.name || '',
+    name: user?.fullName|| '',
     email: user?.email || '',
     currentPassword: '',
     newPassword: '',
@@ -136,26 +136,26 @@ const ProfilePage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">My Account</h1>
+        <h1 className="text-3xl font-bold text-wine mb-6">My Account</h1>
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-x-16">
           {/* Sidebar */}
           <div className="md:col-span-1">
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="bg-whitesmoke  w-64 rounded-lg shadow-md overflow-hidden">
               <div className="p-6 pb-0">
                 <div className="flex flex-col items-center">
-                  <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                    <User size={48} className="text-blue-600" />
+                  <div className="w-24 h-24 bg-wine rounded-full flex items-center justify-center mb-4">
+                    <User size={48} className="text-white" />
                   </div>
-                  <h2 className="text-xl font-semibold text-gray-900">{user?.name}</h2>
-                  <p className="text-gray-600 mb-4">{user?.email}</p>
+                  <h2 className="text-xl font-semibold text-black">{user?.fullName}</h2>
+                  <p className="text-black ray-600 mb-7">{user?.email}</p>
                 </div>
               </div>
               
               <div className="border-t border-gray-200 mt-4">
                 <button
                   className={`w-full py-3 px-6 text-left flex items-center ${
-                    activeTab === 'profile' ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-600' : 'text-gray-700'
+                    activeTab === 'profile' ? 'bg-white text-wine border-l-4 border-wine' : 'text-gray-700'
                   }`}
                   onClick={() => setActiveTab('profile')}
                 >
@@ -164,7 +164,7 @@ const ProfilePage: React.FC = () => {
                 </button>
                 <button
                   className={`w-full py-3 px-6 text-left flex items-center ${
-                    activeTab === 'security' ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-600' : 'text-gray-700'
+                    activeTab === 'security' ? 'bg-white text-wine border-l-4 border-wine' : 'text-gray-700'
                   }`}
                   onClick={() => setActiveTab('security')}
                 >
@@ -183,12 +183,12 @@ const ProfilePage: React.FC = () => {
           </div>
           
           {/* Main Content */}
-          <div className="md:col-span-3">
-            <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="md:col-span-3 bg- gap-4 pl-6">
+            <div className="bg-whitesmoke rounded-lg shadow-md p-6">
               {activeTab === 'profile' ? (
                 <>
                   <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-xl font-semibold text-gray-900">Profile Information</h2>
+                    <h2 className="text-xl font-semibold text-wine ">Profile Information</h2>
                     {!isEditing && (
                       <Button
                         variant="outline"
@@ -231,7 +231,7 @@ const ProfilePage: React.FC = () => {
                               setIsEditing(false);
                               setFormData({
                                 ...formData,
-                                name: user?.name || '',
+                                name: user?.fullName || '',
                                 email: user?.email || '',
                               });
                             }}
@@ -253,7 +253,7 @@ const ProfilePage: React.FC = () => {
                     <div className="space-y-6">
                       <div>
                         <p className="text-sm font-medium text-gray-500">Full Name</p>
-                        <p className="mt-1 text-gray-900">{user?.name}</p>
+                        <p className="mt-1 text-gray-900">{user?.fullName}</p>
                       </div>
                       <div>
                         <p className="text-sm font-medium text-gray-500">Email Address</p>

@@ -9,55 +9,55 @@ const HomePage: React.FC = () => {
   const categories = [
     {
       name: 'T-shirts',
-      image: 'https://images.pexels.com/photos/6347888/pexels-photo-6347888.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: 'https://i.pinimg.com/736x/43/dd/cf/43ddcfc435be9a44b5be7e24a77a7d0e.jpg',
       path: '/products/t-shirts',
       description: 'Custom designed t-shirts for any occasion'
     },
     {
       name: 'Bags',
-      image: 'https://images.pexels.com/photos/934063/pexels-photo-934063.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: 'https://images.pexels.com/photos/5424974/pexels-photo-5424974.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       path: '/products/bags',
       description: 'Stylish and durable custom bags'
     },
     {
       name: 'Awards',
-      image: 'https://images.pexels.com/photos/6332747/pexels-photo-6332747.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: 'https://images.pexels.com/photos/6565255/pexels-photo-6565255.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       path: '/products/awards',
       description: 'Personalized awards and trophies'
     },
     {
       name: 'Bottles',
-      image: 'https://images.pexels.com/photos/1342529/pexels-photo-1342529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: 'https://i.pinimg.com/736x/ab/6e/3b/ab6e3b189fb5f63b15a4324d1f39a1f5.jpg',
       path: '/products/bottles',
       description: 'Custom water bottles and drinkware'
     },
     {
       name: 'Packaging',
-      image: 'https://images.pexels.com/photos/7319097/pexels-photo-7319097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: 'https://images.pexels.com/photos/9594428/pexels-photo-9594428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       path: '/products/packaging',
       description: 'Branded packaging solutions'
     },
     {
       name: 'Photo Gifts',
-      image: 'https://images.pexels.com/photos/1109543/pexels-photo-1109543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: 'https://i.pinimg.com/736x/05/c4/a6/05c4a63488c728dcf5fd6e62105b670f.jpg',
       path: '/products/photo-gifts',
       description: 'Personalized photo gifts and keepsakes'
     },
     {
       name: 'Stickers',
-      image: 'https://images.pexels.com/photos/5433010/pexels-photo-5433010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: 'https://images.pexels.com/photos/20336992/pexels-photo-20336992/free-photo-of-stickers-on-van-back-window.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       path: '/products/stickers',
       description: 'Custom stickers and labels'
     },
     {
       name: 'ID Cards',
-      image: 'https://images.pexels.com/photos/6120214/pexels-photo-6120214.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: 'https://images.pexels.com/photos/7108127/pexels-photo-7108127.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       path: '/products/id-cards',
       description: 'Professional ID cards and badges'
     },
     {
       name: 'Banners',
-      image: 'https://images.pexels.com/photos/7319179/pexels-photo-7319179.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: 'https://i.pinimg.com/736x/32/c8/77/32c877f199e3c9a64a02a6fa4907780b.jpg',
       path: '/products/banners',
       description: 'Custom banners for any event'
     }
@@ -187,26 +187,26 @@ const HomePage: React.FC = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center justify-items-center mb-10">
             {/* Company Logos */}
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Facebook_f_Logo_%282019%29.svg/1200px-Facebook_f_Logo_%282019%29.svg.png" 
-                alt="Facebook" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+            <img src="https://i.pinimg.com/736x/db/19/33/db19332a23a44f772c5a1855a8aabf70.jpg" 
+                alt="Facebook" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png" 
-                alt="Microsoft" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+                alt="Microsoft" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png" 
-                alt="Google" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+                alt="Google" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/2560px-Paytm_Logo_%28standalone%29.svg.png" 
-                alt="Paytm" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+                alt="Paytm" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Uber_App_Icon.svg/2048px-Uber_App_Icon.svg.png" 
                 alt="Uber" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
             
             <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" 
-                alt="Zaalima" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+                alt="Zaalima" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" 
-                alt="Amazon" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+                alt="Amazon" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
           </div>
           
           <div className="text-center">
