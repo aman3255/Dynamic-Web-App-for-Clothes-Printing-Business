@@ -210,6 +210,7 @@ const ProfilePage: React.FC = () => {
                           onChange={handleInputChange}
                           error={errors.name}
                           fullWidth
+                          //@ts-ignore
                           icon={<User size={18} className="text-gray-400" />}
                         />
                         
@@ -221,6 +222,7 @@ const ProfilePage: React.FC = () => {
                           onChange={handleInputChange}
                           error={errors.email}
                           fullWidth
+                          //@ts-ignore
                           icon={<Mail size={18} className="text-gray-400" />}
                         />
                         

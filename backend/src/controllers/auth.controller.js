@@ -125,7 +125,42 @@ const SigninController = async (req, res) => {
     }
 };
 
+// New controller to get current user information based on token
+const GetCurrentUserController = async (req, res) => {
+    try {
+        // The user information is already attached to the request by the authenticateToken middleware
+        const user = req.user;
+        
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+        
+        return res.status(200).json({
+            success: true,
+            message: 'User data retrieved successfully',
+            data: {
+                user: {
+                    id: user.id,
+                    fullName: user.fullName,
+                    email: user.email
+                }
+            }
+        });
+    } catch (error) {
+        console.error(`Error retrieving user data: ${error.message}`);
+        return res.status(500).json({
+            success: false,
+            message: 'An error occurred while retrieving user data',
+            error: error.message
+        });
+    }
+};
+
 module.exports = {
     SignupController,
-    SigninController
+    SigninController,
+    GetCurrentUserController
 }

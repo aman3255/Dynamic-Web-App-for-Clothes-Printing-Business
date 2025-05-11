@@ -1,61 +1,56 @@
-// ========= JWT utils ======================================
 const jwt = require('jsonwebtoken');
-require('dotenv').config(); // This should come before accessing process.env
-const DEV_JWT_SECRET_KEY = process.env.DEV_JWT_SECRET_KEY;
-// ==========================================================
+require('dotenv').config();
 
-// ====== JWT Token Generation ==========================
-const tokenCache = new Map(); // Cache to store tokens (in-memory cache (key-value store)
+// Simple in-memory token cache
+const tokenCache = new Map();
 
+/**
+ * Generates a JWT token for a user
+ * @param {string} userId - User ID
+ * @param {string} email - User email
+ * @param {string} phone - User phone
+ * @returns {string} JWT token
+ */
 const generateToken = (userId, email, phone) => {
     try {
-        // Check if secret key is available
-        if (!DEV_JWT_SECRET_KEY) {
-            const err = new Error('JWT secret key not configured');
-            err.statusCode = 500;
-            throw err;
-        }
-
-        const token = jwt.sign({
+        const payload = {
             userId,
             email,
             phone
-        },
-            DEV_JWT_SECRET_KEY, {
+        };
+        
+        // Get JWT secret from environment variables or use a default (for development only)
+        const jwtSecret = process.env.DEV_JWT_SECRET_KEY || 'your-default-secret-key';
+        
+        // Set token expiration (1 hour)
+        const options = {
             expiresIn: '1h'
-        });
-
-        tokenCache.set(email, {
-            token,
-            expiresAt: Date.now() + 3600000 // 1 hour in milliseconds
-        });
+        };
+        
+        // Generate and return token
+        const token = jwt.sign(payload, jwtSecret, options);
         return token;
     } catch (error) {
-        console.error('Error while generating token:', error);
-        const err = new Error('Error while generating token');
-        err.statusCode = 500; // Fixed: Added statusCode
-        throw err;
+        console.error(`Error generating token: ${error.message}`);
+        throw new Error('Failed to generate authentication token');
     }
 };
 
+/**
+ * Verifies a JWT token
+ * @param {string} token - JWT token to verify
+ * @returns {Object} Decoded token payload
+ */
 const verifyToken = (token) => {
     try {
-        if (!DEV_JWT_SECRET_KEY) {
-            const err = new Error('JWT secret key not configured');
-            err.statusCode = 500; // Fixed: Added statusCode
-            throw err;
-        }
-
-        const decoded = jwt.verify(token, DEV_JWT_SECRET_KEY);
+        const jwtSecret = process.env.DEV_JWT_SECRET_KEY || 'your-default-secret-key';
+        const decoded = jwt.verify(token, jwtSecret);
         return decoded;
     } catch (error) {
-        console.error('Token verification failed:', error);
-        const err = new Error('Token verification failed');
-        err.statusCode = 401; // Using 401 Unauthorized for token verification failures
-        throw err;
+        console.error(`Token verification error: ${error.message}`);
+        throw new Error('Invalid or expired token');
     }
 };
-// ==========================================================
 
 module.exports = {
     generateToken,

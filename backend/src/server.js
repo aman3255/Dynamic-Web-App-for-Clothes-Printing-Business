@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const { dbConnect } =  require('./database/connect.db');
+const { dbConnect } = require('./database/connect.db');
 const v1Router = require('./routes/v1/v1.router');
 
 //  ========== ENVIRONMENT VARIABLES ==========
@@ -14,7 +14,10 @@ const NODE_ENV = process.env.NODE_ENV;
 // ======= Server =========
 const server = express();
 server.use(express.json());
-server.use(cors());
+server.use(cors({
+    origin: 'http://localhost:5173', // Your frontend URL
+    credentials: true
+}));
 // ========================
 
 // ======= Routes =========

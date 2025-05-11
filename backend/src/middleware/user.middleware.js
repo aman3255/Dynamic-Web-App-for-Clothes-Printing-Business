@@ -1,53 +1,59 @@
-const { verifyToken } = require('./../service/jwt.service');
+const jwt = require('jsonwebtoken');
+const { jwtSecret } = require('dotenv').config().parsed;
+const UserModel = require('../models/users.model');
 
-/**
- * Middleware to check if user is authenticated via JWT token
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- * @param {Function} next - Express next middleware function
- */
-const userLoginOrNot = async (req, res, next) => {
+// This middleware verifies the JWT token
+const authenticateToken = async (req, res, next) => {
     try {
-        // Get authorization header
+        // Get auth header
         const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
         
-        // Check if header exists and has correct format
-        if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            return res.status(401).json({
-                success: false,
-                message: 'Authorization header missing or malformed (use Bearer <token>)'
-            });
-        }
-
-        // Extract token from header
-        const token = authHeader.split(' ')[1];
-
-        // Verify token exists
         if (!token) {
-            return res.status(401).json({
+            return res.status(401).json({ 
                 success: false,
-                message: 'Token missing after Bearer'
+                message: 'Authentication token is missing'
             });
         }
-
-        // Verify the token and set user in request
-        // The verifyToken function already handles JWT verification errors
-        const decoded = verifyToken(token);
-        req.user = decoded;
-
-        // Continue to the next middleware or route handler
-        next();
-    } catch (error) {
-        console.error('Authentication error:', error.message);
         
-        // Return appropriate status code from error or default to 401
-        return res.status(error.statusCode || 401).json({
+        // Verify token
+        jwt.verify(token, process.env.JWT_SECRET || jwtSecret, async (err, decoded) => {
+            if (err) {
+                return res.status(403).json({
+                    success: false, 
+                    message: 'Invalid or expired token'
+                });
+            }
+            
+            // Check if user exists
+            const user = await UserModel.findById(decoded.userId);
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'User not found'
+                });
+            }
+            
+            // Attach user to request
+            req.user = {
+                id: user._id,
+                email: user.email,
+                phone: user.phone,
+                fullName: user.fullName
+            };
+            
+            next();
+        });
+    } catch (error) {
+        console.error(`Authentication error: ${error.message}`);
+        return res.status(500).json({
             success: false,
-            message: `Authentication failed: ${error.message}`
+            message: 'Authentication error',
+            error: error.message
         });
     }
 };
 
 module.exports = {
-    userLoginOrNot
+    authenticateToken
 };

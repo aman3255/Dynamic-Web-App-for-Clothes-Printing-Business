@@ -10,20 +10,20 @@ const {
   getAllOrders,
   updateOrderStatus
 } = require('./../../controllers/order.controller');
-const { userLoginOrNot } = require('../../middleware/user.middleware');
+const { authenticateToken } = require('../../middleware/user.middleware');
 
 const orderRouter = express.Router();
 
 // User routes
-orderRouter.post('/', userLoginOrNot, createOrder);
-orderRouter.post('/upload-design', userLoginOrNot, uploadDesign, handleUploadError, processUploadedDesign);
-orderRouter.get('/user', userLoginOrNot, getUserOrders);
-orderRouter.get('/:id', userLoginOrNot, getOrderById);
-orderRouter.put('/:id/cancel', userLoginOrNot, cancelOrder);
+orderRouter.post('/', authenticateToken, createOrder);
+orderRouter.post('/upload-design', authenticateToken, uploadDesign, handleUploadError, processUploadedDesign);
+orderRouter.get('/user', authenticateToken, getUserOrders);
+orderRouter.get('/:id', authenticateToken, getOrderById);
+orderRouter.put('/:id/cancel', authenticateToken, cancelOrder);
 
 // Admin routes - assuming you'll create an admin middleware
 // For now using user authentication
-orderRouter.get('/', userLoginOrNot, getAllOrders); 
-orderRouter.put('/:id/status', userLoginOrNot, updateOrderStatus);
+orderRouter.get('/', authenticateToken, getAllOrders); 
+orderRouter.put('/:id/status', authenticateToken, updateOrderStatus);
 
 module.exports = orderRouter;
