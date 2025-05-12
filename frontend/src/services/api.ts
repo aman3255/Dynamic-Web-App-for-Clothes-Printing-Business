@@ -1,6 +1,4 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const BASE_URL = 'http://localhost:4000/api/'; // Updated to include API version path
 
