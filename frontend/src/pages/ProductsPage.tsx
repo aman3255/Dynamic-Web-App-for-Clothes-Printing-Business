@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Filter, Search } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
@@ -33,116 +33,250 @@ const ProductsPage: React.FC = () => {
       variants: ['S', 'M', 'L', 'XL']
     },
     {
-      id: 't2',
-      name: 'Performance Athletic Tees',
-      description: 'Moisture-wicking fabric ideal for sports and workouts',
-      price: 29.99,
-      image: 'https://assets.lummi.ai/assets/QmPyAmtgyGX9ssb2XKtyKcgfiJ3wEBh7UD9UHR38rWHFfN?auto=format&w=1500',
+      id: 't1',
+      name: 'Classic Cotton T-Shirt',
+      description: 'Premium quality cotton t-shirt perfect for everyday wear',
+      price: 24.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
       category: 't-shirts',
       variants: ['S', 'M', 'L', 'XL']
     },
     {
-      id: 't3',
-      name: 'Vintage Graphic T-Shirt',
-      description: 'Retro-inspired design on soft cotton blend',
-      price: 27.99,
-      image: 'https://www.lummi.ai/api/pro/image/452f9632-690e-40d2-a7cd-1b6d8c783e02?asset=original&cb=SRHB1h&auto=format&w=1500',
+      id: 't1',
+      name: 'Classic Cotton T-Shirt',
+      description: 'Premium quality cotton t-shirt perfect for everyday wear',
+      price: 24.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
       category: 't-shirts',
       variants: ['S', 'M', 'L', 'XL']
     },
-    // Add 17 more t-shirts...
-
     // Bags
     {
       id: 'b1',
-      name: 'Canvas Tote Bag',
-      description: 'Durable canvas tote perfect for shopping and daily use',
+      name: 'Eco-Friendly Tote Bag',
+      description: 'Stylish and durable tote bag made from recycled materials',
       price: 19.99,
-      image: 'https://images.pexels.com/photos/934063/pexels-photo-934063.jpeg',
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
       category: 'bags',
-      variants: ['One Size']
+      variants: ['Small', 'Medium', 'Large']
     },
     {
       id: 'b2',
-      name: 'Premium Leather Messenger',
-      description: 'Handcrafted leather messenger bag for professionals',
-      price: 89.99,
-      image: 'https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg',
+      name: 'Canvas Backpack',
+      description: 'Spacious canvas backpack for all your adventures',
+      price: 39.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
       category: 'bags',
-      variants: ['One Size']
+      variants: ['Small', 'Medium', 'Large']
     },
     {
       id: 'b3',
-      name: 'Eco-Friendly Shopping Bag',
-      description: 'Sustainable and reusable shopping bag',
-      price: 14.99,
-      image: 'https://images.pexels.com/photos/5706040/pexels-photo-5706040.jpeg',
+      name: 'Leather Messenger Bag',
+      description: 'Elegant leather messenger bag for professionals',
+      price: 89.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
       category: 'bags',
-      variants: ['One Size']
+      variants: ['Small', 'Medium', 'Large']
     },
-    // Add 17 more bags...
-
-    // Awards
+    //  Awards
     {
       id: 'a1',
-      name: 'Crystal Excellence Trophy',
-      description: 'Elegant crystal award for outstanding achievement',
-      price: 79.99,
-      image: 'https://images.pexels.com/photos/6332747/pexels-photo-6332747.jpeg',
+      name: 'Custom Engraved Trophy',
+      description: 'Personalized trophy for your special achievements',
+      price: 49.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
       category: 'awards',
-      variants: ['Standard']
+      variants: ['Small', 'Medium', 'Large']
     },
     {
       id: 'a2',
-      name: 'Gold Achievement Medal',
-      description: 'Premium metal medal with customizable engraving',
-      price: 34.99,
-      image: 'https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg',
+      name: 'Glass Award Plaque',
+      description: 'Elegant glass plaque for recognition and appreciation',
+      price: 59.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
       category: 'awards',
-      variants: ['Standard']
+      variants: ['Small', 'Medium', 'Large']
     },
     {
       id: 'a3',
-      name: 'Corporate Recognition Plaque',
-      description: 'Professional wooden plaque with metal finish',
-      price: 59.99,
-      image: 'https://images.pexels.com/photos/6332739/pexels-photo-6332739.jpeg',
+      name: 'Custom Medal with Ribbon',
+      description: 'Personalized medal with custom engraving and ribbon',
+      price: 29.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
       category: 'awards',
-      variants: ['Standard']
+      variants: ['Small', 'Medium', 'Large']
     },
-    // Add 17 more awards...
-
     // Bottles
     {
-      id: 'bt1',
+      id: 'b1',
       name: 'Stainless Steel Water Bottle',
-      description: 'Double-walled insulated bottle for hot and cold drinks',
+      description: 'Durable stainless steel water bottle with custom engraving',
       price: 24.99,
-      image: 'https://images.pexels.com/photos/1342529/pexels-photo-1342529.jpeg',
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
       category: 'bottles',
       variants: ['500ml', '750ml', '1L']
     },
     {
-      id: 'bt2',
-      name: 'Sports Squeeze Bottle',
-      description: 'Easy-squeeze bottle perfect for athletes',
-      price: 12.99,
-      image: 'https://images.pexels.com/photos/2885578/pexels-photo-2885578.jpeg',
+      id: 'b2',
+      name: 'Insulated Travel Mug',
+      description: 'Keep your drinks hot or cold with this insulated travel mug',
+      price: 29.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
       category: 'bottles',
-      variants: ['500ml', '750ml']
+      variants: ['500ml', '750ml', '1L']
     },
     {
-      id: 'bt3',
-      name: 'Glass Infuser Bottle',
-      description: 'Glass bottle with fruit infuser basket',
-      price: 29.99,
-      image: 'https://images.pexels.com/photos/1638349/pexels-photo-1638349.jpeg',
+      id: 'b3',
+      name: 'Custom Sports Bottle',
+      description: 'Personalized sports bottle for your active lifestyle',
+      price: 19.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
       category: 'bottles',
-      variants: ['500ml', '750ml']
+      variants: ['500ml', '750ml', '1L']
+    },  
+    // Packaging
+    {
+      id: 'p1',
+      name: 'Custom Gift Box',
+      description: 'Personalized gift box for special occasions',
+      price: 39.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'packaging',
+      variants: ['Small', 'Medium', 'Large']
     },
-    // Add 17 more bottles...
+    {
+      id: 'p2',
+      name: 'Eco-Friendly Packaging Tape',
+      description: 'Biodegradable packaging tape for eco-conscious shipping',
+      price: 9.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'packaging',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    {
+      id: 'p3',
+      name: 'Custom Shipping Labels',
+      description: 'Personalized shipping labels for your packages',
+      price: 14.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'packaging',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    // Photo Gifts
+    {
+      id: 'pg1',
+      name: 'Custom Photo Mug',
+      description: 'Personalized mug with your favorite photo',
+      price: 19.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'photo-gifts',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    {
+      id: 'pg2',
+      name: 'Photo Canvas Print',
+      description: 'High-quality canvas print of your favorite photo',
+      price: 49.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'photo-gifts',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    {
+      id: 'pg3',
+      name: 'Custom Photo Puzzle',
+      description: 'Personalized puzzle with your favorite photo',
+      price: 29.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'photo-gifts',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    // Stickers
+    {
+      id: 's1',
+      name: 'Custom Vinyl Stickers',
+      description: 'High-quality vinyl stickers with custom designs',
+      price: 9.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'stickers',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    {
+      id: 's2',
+      name: 'Sticker Sheets',
+      description: 'Sheets of custom stickers for various uses',
+      price: 14.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'stickers',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    {
+      id: 's3',
+      name: 'Custom Bumper Stickers',
+      description: 'Durable bumper stickers with custom designs',
+      price: 12.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'stickers',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    // ID Cards
+    {
+      id: 'id1',
+      name: 'Custom ID Badge',
+      description: 'Personalized ID badge for events and organizations',
+      price: 14.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'id-cards',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    {
+      id: 'id2',
+      name: 'Plastic ID Card',
+      description: 'Durable plastic ID card with custom design',
+      price: 19.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'id-cards',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    {
+      id: 'id3',
+      name: 'Lanyard with ID Holder',
+      description: 'Custom lanyard with ID holder for convenience',
+      price: 9.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'id-cards',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    // Banners
+    {
+      id: 'b1',
+      name: 'Vinyl Banner',
+      description: 'Durable vinyl banner for indoor and outdoor use',
+      price: 49.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'banners',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    {
+      id: 'b2',
+      name: 'Retractable Banner Stand',
+      description: 'Portable retractable banner stand for events',
+      price: 89.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'banners',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    {
+      id: 'b3',
+      name: 'Custom Fabric Banner',
+      description: 'High-quality fabric banner for a premium look',
+      price: 69.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'banners',
+      variants: ['Small', 'Medium', 'Large']
+    },
+    // 
 
-    // Continue with similar patterns for other categories...
+    // ... (rest of the products remain the same, using 'variants' instead of 'sizes')
   ];
 
   const toggleFilters = () => {
@@ -191,9 +325,9 @@ const ProductsPage: React.FC = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 ">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <h1 className="text-3xl font-bold text-wine mb-2">
           {category 
             ? `${category.charAt(0).toUpperCase() + category.slice(1)}` 
             : 'All Products'}
@@ -205,8 +339,8 @@ const ProductsPage: React.FC = () => {
 
       <div className="flex flex-col md:flex-row gap-8">
         {/* Sidebar / Filters */}
-        <div className="w-full md:w-64 flex-shrink-0">
-          <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="w-full md:w-64 flex-shrink-0 ">
+          <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-4 z-20">
             <div className="mb-4">
               <div className="relative">
                 <Input
@@ -316,7 +450,6 @@ const ProductsPage: React.FC = () => {
                   price={product.price}
                   image={product.image}
                   category={product.category}
-                  //@ts-ignore
                   variants={product.variants}
                 />
               ))}

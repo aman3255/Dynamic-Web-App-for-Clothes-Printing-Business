@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ShoppingCart, ChevronLeft } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
-import api from '../services/api';
 import { useCart, CartItem } from '../contexts/CartContext';
 import Button from '../components/Button';
 import FileUpload from '../components/FileUpload';
-// import Input from '../components/Input';
 import toast from 'react-hot-toast';
 
 interface Product {
@@ -17,7 +15,7 @@ interface Product {
   image: string;
   category: string;
   details?: string[];
-  sizes?: string[];
+  variants?: string[];
   colors?: string[];
 }
 
@@ -27,32 +25,89 @@ const ProductDetailPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedVariant, setSelectedVariant] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [designFile, setDesignFile] = useState<File | null>(null);
   const [notes, setNotes] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [designUrl, setDesignUrl] = useState<string | undefined>(undefined);
-  
+
   const { addToCart } = useCart();
   const navigate = useNavigate();
+
+  // Demo products data - the same as in ProductsPage
+  const demoProducts: Product[] = [
+    // T-shirts
+    {
+      id: 't1',
+      name: 'Classic Cotton T-Shirt',
+      description: 'Premium quality cotton t-shirt perfect for everyday wear',
+      price: 24.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 't-shirts',
+      variants: ['S', 'M', 'L', 'XL'],
+      colors: ['White', 'Black', 'Navy', 'Red', 'Gray']
+    },
+    // Bags
+    {
+      id: 'b1',
+      name: 'Eco-Friendly Tote Bag',
+      description: 'Stylish and durable tote bag made from recycled materials',
+      price: 19.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'bags',
+      variants: ['Small', 'Medium', 'Large'],
+      colors: ['Natural', 'Black', 'Blue']
+    },
+    {
+      id: 'b2',
+      name: 'Canvas Backpack',
+      description: 'Spacious canvas backpack for all your adventures',
+      price: 39.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'bags',
+      variants: ['Small', 'Medium', 'Large'],
+      colors: ['Brown', 'Gray', 'Green']
+    },
+    // Awards
+    {
+      id: 'a1',
+      name: 'Custom Engraved Trophy',
+      description: 'Personalized trophy for your special achievements',
+      price: 49.99,
+      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      category: 'awards',
+      variants: ['Small', 'Medium', 'Large'],
+      colors: ['Gold', 'Silver', 'Bronze']
+    },
+    // And more products as in ProductsPage...
+  ];
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const response = await api.getProductById(id!);
-        setProduct(response.data);
         
-        // Set default selections if available
-        if (response.data.sizes && response.data.sizes.length > 0) {
-          setSelectedSize(response.data.sizes[0]);
-        }
-        if (response.data.colors && response.data.colors.length > 0) {
-          setSelectedColor(response.data.colors[0]);
-        }
+        // Instead of using an API, we're using the demo products data
+        const foundProduct = demoProducts.find(product => product.id === id);
         
-        setLoading(false);
+        if (foundProduct) {
+          setProduct(foundProduct);
+          
+          // Set default selections if available
+          if (foundProduct.variants && foundProduct.variants.length > 0) {
+            setSelectedVariant(foundProduct.variants[0]);
+          }
+          if (foundProduct.colors && foundProduct.colors.length > 0) {
+            setSelectedColor(foundProduct.colors[0]);
+          }
+          
+          setLoading(false);
+        } else {
+          // If product not found, use fallback
+          setProduct(fallbackProduct);
+          setLoading(false);
+        }
       } catch (err) {
         console.error('Failed to fetch product:', err);
         setError('Failed to load product details. Please try again later.');
@@ -78,25 +133,26 @@ const ProductDetailPage: React.FC = () => {
 
   const handleAddToCart = async () => {
     if (!product) return;
-    
+
+    // Validate variant selection if variants exist
+    if (product.variants && product.variants.length > 0 && !selectedVariant) {
+      toast.error('Please select a variant');
+      return;
+    }
+
     try {
       let uploadedDesignUrl = designUrl;
-      
+
       if (designFile) {
         setIsUploading(true);
-        // Upload the design file
-        try {
-          const uploadResponse = await api.uploadDesign(designFile);
-          uploadedDesignUrl = uploadResponse.data.url;
-          setDesignUrl(uploadedDesignUrl);
-        } catch (error) {
-          console.error('Failed to upload design:', error);
-          toast.error('Failed to upload design. Please try again.');
-          setIsUploading(false);
-          return;
-        }
+        // In a real app, this would upload the file to your server
+        // For now, we'll simulate a successful upload after a delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        uploadedDesignUrl = URL.createObjectURL(designFile); // Create a local URL for the file
+        setDesignUrl(uploadedDesignUrl);
+        setIsUploading(false);
       }
-      
+
       // Create a cart item with a unique ID
       const cartItem: CartItem = {
         id: uuidv4(), // Generate a unique ID for this cart item
@@ -105,15 +161,16 @@ const ProductDetailPage: React.FC = () => {
         price: product.price,
         image: product.image,
         quantity,
+        variant: selectedVariant,
+        color: selectedColor,
         designFile,
         designUrl: uploadedDesignUrl,
         notes
       };
-      
+
       addToCart(cartItem);
       toast.success('Added to cart!');
-      setIsUploading(false);
-      
+
     } catch (err) {
       console.error('Failed to add to cart:', err);
       toast.error('Failed to add to cart. Please try again.');
@@ -127,7 +184,7 @@ const ProductDetailPage: React.FC = () => {
     name: 'Premium Custom T-Shirt',
     description: 'Our premium cotton t-shirt is perfect for showcasing your unique design. Made from high-quality materials, this comfortable shirt will make your custom artwork stand out.',
     price: 24.99,
-    image: 'https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
     category: 'T-shirts',
     details: [
       '100% combed and ring-spun cotton',
@@ -136,7 +193,7 @@ const ProductDetailPage: React.FC = () => {
       'Shoulder-to-shoulder taping',
       'Available in various colors and sizes'
     ],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    variants: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['White', 'Black', 'Navy', 'Red', 'Gray']
   };
 
@@ -144,7 +201,7 @@ const ProductDetailPage: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <button 
+      <button
         onClick={() => navigate(-1)}
         className="flex items-center text-gray-600 hover:text-gray-900 mb-6"
       >
@@ -164,9 +221,9 @@ const ProductDetailPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Product Image */}
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <img 
-              src={displayProduct.image} 
-              alt={displayProduct.name} 
+            <img
+              src={displayProduct.image}
+              alt={displayProduct.name}
               className="w-full h-auto object-cover"
             />
           </div>
@@ -178,10 +235,10 @@ const ProductDetailPage: React.FC = () => {
             </span>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">{displayProduct.name}</h1>
             <p className="text-2xl font-bold text-blue-600 mb-4">${displayProduct.price.toFixed(2)}</p>
-            
+
             <div className="mb-6">
               <p className="text-gray-700 mb-4">{displayProduct.description}</p>
-              
+
               {displayProduct.details && (
                 <div className="mt-4">
                   <h3 className="font-semibold text-gray-900 mb-2">Product Details:</h3>
@@ -196,21 +253,20 @@ const ProductDetailPage: React.FC = () => {
 
             {/* Product Options */}
             <div className="space-y-6 mb-8">
-              {displayProduct.sizes && displayProduct.sizes.length > 0 && (
+              {displayProduct.variants && displayProduct.variants.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Size:</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">Variant:</h3>
                   <div className="flex flex-wrap gap-2">
-                    {displayProduct.sizes.map((size) => (
+                    {displayProduct.variants.map((variant) => (
                       <button
-                        key={size}
-                        onClick={() => setSelectedSize(size)}
-                        className={`px-4 py-2 border text-sm rounded-md ${
-                          selectedSize === size
+                        key={variant}
+                        onClick={() => setSelectedVariant(variant)}
+                        className={`px-4 py-2 border text-sm rounded-md ${selectedVariant === variant
                             ? 'border-blue-600 bg-blue-50 text-blue-600'
                             : 'border-gray-300 text-gray-700 hover:border-gray-400'
-                        }`}
+                          }`}
                       >
-                        {size}
+                        {variant}
                       </button>
                     ))}
                   </div>
@@ -225,11 +281,10 @@ const ProductDetailPage: React.FC = () => {
                       <button
                         key={color}
                         onClick={() => setSelectedColor(color)}
-                        className={`px-4 py-2 border text-sm rounded-md ${
-                          selectedColor === color
+                        className={`px-4 py-2 border text-sm rounded-md ${selectedColor === color
                             ? 'border-blue-600 bg-blue-50 text-blue-600'
                             : 'border-gray-300 text-gray-700 hover:border-gray-400'
-                        }`}
+                          }`}
                       >
                         {color}
                       </button>

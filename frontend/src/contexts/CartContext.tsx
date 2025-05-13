@@ -7,6 +7,8 @@ export interface CartItem {
   price: number;
   quantity: number;
   image: string;
+  variant?: string; // Added optional variant
+  color?: string;   // Added optional color
   designFile?: File | null;
   designUrl?: string;
   notes?: string;
@@ -68,7 +70,11 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const addToCart = (item: CartItem) => {
     setCartItems(prevItems => {
       // Check if the item already exists in the cart
-      const existingItemIndex = prevItems.findIndex(i => i.id === item.id);
+      const existingItemIndex = prevItems.findIndex(i => 
+        i.productId === item.productId && 
+        i.variant === item.variant && 
+        i.color === item.color
+      );
       
       if (existingItemIndex >= 0) {
         // Update the existing item
