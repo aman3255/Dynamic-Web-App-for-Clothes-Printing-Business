@@ -25,28 +25,28 @@ const ProductsPage: React.FC = () => {
     // T-shirts
     {
       id: 't1',
-      name: 'Classic Cotton T-Shirt',
+      name: 'Glory Arc Relaxed Fit T-Shirt - 100% Cotton',
       description: 'Premium quality cotton t-shirt perfect for everyday wear',
       price: 24.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1627225793904-a2f900a6e4cf?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 't-shirts',
       variants: ['S', 'M', 'L', 'XL']
     },
     {
       id: 't1',
-      name: 'Classic Cotton T-Shirt',
+      name: 'Chase Onyx Heavy Weight Oversized Fit T-Shirt',
       description: 'Premium quality cotton t-shirt perfect for everyday wear',
       price: 24.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1589902860314-e910697dea18?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 't-shirts',
       variants: ['S', 'M', 'L', 'XL']
     },
     {
       id: 't1',
-      name: 'Classic Cotton T-Shirt',
+      name: 'Chase Black Distressed Heavy Weight Oversized Fit T-Shirt',
       description: 'Premium quality cotton t-shirt perfect for everyday wear',
       price: 24.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/flagged/photo-1556293467-7acc070563ee?q=80&w=2624&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 't-shirts',
       variants: ['S', 'M', 'L', 'XL']
     },
