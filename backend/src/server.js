@@ -15,7 +15,7 @@ const NODE_ENV = process.env.NODE_ENV;
 const server = express();
 server.use(express.json());
 server.use(cors({
-    origin: 'http://localhost:5173', // Your frontend URL
+    origin: 'http://localhost:5173',
     credentials: true
 }));
 // ========================

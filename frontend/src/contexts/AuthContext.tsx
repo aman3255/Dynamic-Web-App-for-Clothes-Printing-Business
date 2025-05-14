@@ -34,13 +34,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         api.setAuthToken(token);
         try {
           const response = await api.auth.getCurrentUser();
-          if (response.data && response.data.success) {
+          
+          // More comprehensive check for valid user data
+          if (response && 
+              response.data && 
+              response.data.success && 
+              response.data.data && 
+              response.data.data.user) {
+            
             setUser(response.data.data.user);
             setIsAuthenticated(true);
+          } else {
+            // If response format isn't as expected but no error thrown
+            console.warn('Auth check: Unexpected response format', response);
+            handleLogout('Session expired. Please login again.');
           }
-        } catch (err) {
-          // Invalid/expired token
-          localStorage.removeItem('token');
+        } catch (err: any) {
+          // Handle auth check error
+          console.error('Authentication check failed:', err);
+          
+          // Only clear auth if it's an auth-related error (like 401 Unauthorized)
+          if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+            handleLogout('Session expired. Please login again.');
+          } else {
+            // For network or server errors, don't log the user out
+            // This prevents logout on temporary server issues
+            console.error('Server or network error during auth check');
+            setError('Connection error. Your login status could not be verified.');
+          }
         }
       }
 
@@ -49,6 +70,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     checkAuth();
   }, []);
+
+  // Helper function to handle logout with optional error message
+  const handleLogout = (errorMsg?: string) => {
+    localStorage.removeItem('token');
+    api.removeAuthToken();
+    setUser(null);
+    setIsAuthenticated(false);
+    
+    if (errorMsg) {
+      setError(errorMsg);
+    }
+  };
 
   const register = async (fullName: string, email: string, password: string, phone?: string) => {
     setLoading(true);
@@ -63,20 +96,41 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         addresses: []
       });
 
-      if (response.data && response.data.success) {
+      if (response && response.data && response.data.success) {
         const { accessToken, user } = response.data.data;
 
-        // ✅ Store token in localStorage
+        // Store token in localStorage
         localStorage.setItem('token', accessToken);
         api.setAuthToken(accessToken);
 
         setUser(user);
         setIsAuthenticated(true);
       } else {
-        throw new Error(response.data.message || 'Registration failed');
+        throw new Error(response?.data?.message || 'Registration failed');
       }
     } catch (err: any) {
-      const errorMessage = err.response?.data?.message || err.message || 'An error occurred during registration';
+      let errorMessage = 'An error occurred during registration';
+      
+      console.error('Registration error:', err); // Add this for debugging
+      
+      // Better error handling with more specific messages
+      if (err.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        errorMessage = err.response.data?.message || `Server error: ${err.response.status}`;
+                      
+        // Check if it's a 404 error
+        if (err.response.status === 404) {
+          errorMessage = 'API endpoint not found. Please check server configuration. Endpoint: /auth/signup';
+        }
+      } else if (err.request) {
+        // The request was made but no response was received
+        errorMessage = 'No response from server. Please check if the server is running at http://localhost:4000';
+      } else {
+        // Something happened in setting up the request
+        errorMessage = err.message;
+      }
+      
       setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
@@ -95,20 +149,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         password
       });
 
-      if (response.data && response.data.success) {
+      if (response && response.data && response.data.success) {
         const { accessToken, user } = response.data.data;
 
-        // ✅ Store token in localStorage
+        // Store token in localStorage
         localStorage.setItem('token', accessToken);
         api.setAuthToken(accessToken);
 
         setUser(user);
         setIsAuthenticated(true);
       } else {
-        throw new Error(response.data.message || 'Login failed');
+        throw new Error(response?.data?.message || 'Login failed');
       }
     } catch (err: any) {
-      const errorMessage = err.response?.data?.message || err.message || 'An error occurred during login';
+      let errorMessage = 'An error occurred during login';
+      
+      console.error('Login error:', err); // Add this for debugging
+      
+      // Better error handling with more specific messages
+      if (err.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        errorMessage = err.response.data?.message || 
+                      `Server error: ${err.response.status}`;
+                      
+        // Check if it's a 404 error
+        if (err.response.status === 404) {
+          errorMessage = 'API endpoint not found. Please check server configuration. Endpoint: /auth/signin';
+        }
+      } else if (err.request) {
+        // The request was made but no response was received
+        errorMessage = 'No response from server. Please check if the server is running at http://localhost:4000';
+      } else {
+        // Something happened in setting up the request
+        errorMessage = err.message;
+      }
+      
       setError(errorMessage);
       throw new Error(errorMessage);
     } finally {
@@ -117,10 +193,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = () => {
-    localStorage.removeItem('token'); // ✅ clear saved token
-    api.removeAuthToken();
-    setUser(null);
-    setIsAuthenticated(false);
+    handleLogout();
   };
 
   const clearError = () => {
