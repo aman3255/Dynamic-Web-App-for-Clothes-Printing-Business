@@ -56,7 +56,7 @@ const ProductsPage: React.FC = () => {
       name: 'Eco-Friendly Tote Bag',
       description: 'Stylish and durable tote bag made from recycled materials',
       price: 19.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://plus.unsplash.com/premium_photo-1737180621286-c2250ccce178?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'bags',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -65,7 +65,7 @@ const ProductsPage: React.FC = () => {
       name: 'Canvas Backpack',
       description: 'Spacious canvas backpack for all your adventures',
       price: 39.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1622560482357-789dc8a50923?q=80&w=3688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'bags',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -74,7 +74,7 @@ const ProductsPage: React.FC = () => {
       name: 'Leather Messenger Bag',
       description: 'Elegant leather messenger bag for professionals',
       price: 89.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://plus.unsplash.com/premium_photo-1670984076180-22a6c8f27f2b?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'bags',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -84,7 +84,7 @@ const ProductsPage: React.FC = () => {
       name: 'Custom Engraved Trophy',
       description: 'Personalized trophy for your special achievements',
       price: 49.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1527980473913-566fcaa9e34e?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'awards',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -93,7 +93,7 @@ const ProductsPage: React.FC = () => {
       name: 'Glass Award Plaque',
       description: 'Elegant glass plaque for recognition and appreciation',
       price: 59.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1550438655-400744b9fefc?q=80&w=3436&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'awards',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -102,7 +102,7 @@ const ProductsPage: React.FC = () => {
       name: 'Custom Medal with Ribbon',
       description: 'Personalized medal with custom engraving and ribbon',
       price: 29.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1613826488249-b67eba609bed?q=80&w=3428&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'awards',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -112,7 +112,7 @@ const ProductsPage: React.FC = () => {
       name: 'Stainless Steel Water Bottle',
       description: 'Durable stainless steel water bottle with custom engraving',
       price: 24.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://plus.unsplash.com/premium_photo-1681284938505-62efa3494bf2?q=80&w=3542&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'bottles',
       variants: ['500ml', '750ml', '1L']
     },
@@ -121,7 +121,7 @@ const ProductsPage: React.FC = () => {
       name: 'Insulated Travel Mug',
       description: 'Keep your drinks hot or cold with this insulated travel mug',
       price: 29.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1704324564365-3e0c351e5864?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'bottles',
       variants: ['500ml', '750ml', '1L']
     },
@@ -130,7 +130,7 @@ const ProductsPage: React.FC = () => {
       name: 'Custom Sports Bottle',
       description: 'Personalized sports bottle for your active lifestyle',
       price: 19.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1682309832701-a29a1c2c6600?q=80&w=3474&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'bottles',
       variants: ['500ml', '750ml', '1L']
     },  
@@ -140,7 +140,7 @@ const ProductsPage: React.FC = () => {
       name: 'Custom Gift Box',
       description: 'Personalized gift box for special occasions',
       price: 39.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://plus.unsplash.com/premium_photo-1732043121338-000ee99e1804?q=80&w=3432&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'packaging',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -149,7 +149,7 @@ const ProductsPage: React.FC = () => {
       name: 'Eco-Friendly Packaging Tape',
       description: 'Biodegradable packaging tape for eco-conscious shipping',
       price: 9.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1617912760717-06f3976cf18c?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'packaging',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -158,7 +158,7 @@ const ProductsPage: React.FC = () => {
       name: 'Custom Shipping Labels',
       description: 'Personalized shipping labels for your packages',
       price: 14.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1567570670849-79db9c45cd9d?q=80&w=3474&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'packaging',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -168,7 +168,7 @@ const ProductsPage: React.FC = () => {
       name: 'Custom Photo Mug',
       description: 'Personalized mug with your favorite photo',
       price: 19.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1623904156282-99690f6d30f4?q=80&w=3500&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'photo-gifts',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -177,7 +177,7 @@ const ProductsPage: React.FC = () => {
       name: 'Photo Canvas Print',
       description: 'High-quality canvas print of your favorite photo',
       price: 49.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://plus.unsplash.com/premium_photo-1698362819283-8a321d8cf2ab?q=80&w=3538&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'photo-gifts',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -186,7 +186,7 @@ const ProductsPage: React.FC = () => {
       name: 'Custom Photo Puzzle',
       description: 'Personalized puzzle with your favorite photo',
       price: 29.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1737328519608-ee80fc77f72e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'photo-gifts',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -196,7 +196,7 @@ const ProductsPage: React.FC = () => {
       name: 'Custom Vinyl Stickers',
       description: 'High-quality vinyl stickers with custom designs',
       price: 9.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1560531008-4edf566a4d97?q=80&w=3546&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'stickers',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -205,7 +205,7 @@ const ProductsPage: React.FC = () => {
       name: 'Sticker Sheets',
       description: 'Sheets of custom stickers for various uses',
       price: 14.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://plus.unsplash.com/premium_photo-1725294296978-f4dda437b0f3?q=80&w=3538&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'stickers',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -214,7 +214,7 @@ const ProductsPage: React.FC = () => {
       name: 'Custom Bumper Stickers',
       description: 'Durable bumper stickers with custom designs',
       price: 12.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1685920026448-e6a5529ca28e?q=80&w=3538&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'stickers',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -224,7 +224,7 @@ const ProductsPage: React.FC = () => {
       name: 'Custom ID Badge',
       description: 'Personalized ID badge for events and organizations',
       price: 14.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1589123078295-d06ba77a48e8?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'id-cards',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -233,7 +233,7 @@ const ProductsPage: React.FC = () => {
       name: 'Plastic ID Card',
       description: 'Durable plastic ID card with custom design',
       price: 19.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1722192966983-763c33412758?q=80&w=3471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'id-cards',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -242,7 +242,7 @@ const ProductsPage: React.FC = () => {
       name: 'Lanyard with ID Holder',
       description: 'Custom lanyard with ID holder for convenience',
       price: 9.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://media.istockphoto.com/id/2042672902/photo/blank-nametag-on-gray-background-copy-space.webp?s=2048x2048&w=is&k=20&c=jCcW11uOjaATxZ8nlxpYVBt3rmhdoDuB0ivZcYCzqfU=',
       category: 'id-cards',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -252,7 +252,7 @@ const ProductsPage: React.FC = () => {
       name: 'Vinyl Banner',
       description: 'Durable vinyl banner for indoor and outdoor use',
       price: 49.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1742822050731-dc9da52dad2e?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'banners',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -261,7 +261,7 @@ const ProductsPage: React.FC = () => {
       name: 'Retractable Banner Stand',
       description: 'Portable retractable banner stand for events',
       price: 89.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://media.istockphoto.com/id/1175280398/vector/blue-business-roll-up-banner-abstract-roll-up-background-for-presentation-vertical-roll-up-x.jpg?s=612x612&w=0&k=20&c=GSdaDYz8sjr5rLDsZXG-4DG_dFp9tXXlONnuDvgjPQM=',
       category: 'banners',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -270,7 +270,7 @@ const ProductsPage: React.FC = () => {
       name: 'Custom Fabric Banner',
       description: 'High-quality fabric banner for a premium look',
       price: 69.99,
-      image: 'https://assets.lummi.ai/assets/QmWq23EDQbjDEdzJ1hcxjuE463jhDUM2P7hkwjN2V7dxgS?auto=format&w=1500',
+      image: 'https://images.unsplash.com/photo-1669578298070-7f80b5948a59?q=80&w=3675&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       category: 'banners',
       variants: ['Small', 'Medium', 'Large']
     },
@@ -340,7 +340,7 @@ const ProductsPage: React.FC = () => {
       <div className="flex flex-col md:flex-row gap-8">
         {/* Sidebar / Filters */}
         <div className="w-full md:w-64 flex-shrink-0 ">
-          <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-4 z-20">
+          <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-16 z-20">
             <div className="mb-4">
               <div className="relative">
                 <Input
@@ -364,8 +364,8 @@ const ProductsPage: React.FC = () => {
                     className={`block py-1 px-2 rounded-md text-sm ${
                       (category === undefined && cat.name === 'All Products') ||
                       (category && cat.path.includes(category))
-                        ? 'bg-blue-100 text-blue-700 font-medium'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-wine text-white font-medium'
+                        : 'text-gray-900 hover:bg-gray-100'
                     }`}
                   >
                     {cat.name}
