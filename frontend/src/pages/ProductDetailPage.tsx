@@ -207,7 +207,7 @@ const ProductDetailPage: React.FC = () => {
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-wine"></div>
         </div>
       ) : error ? (
         <div className="bg-red-50 border-l-4 border-red-400 p-4">
@@ -226,11 +226,11 @@ const ProductDetailPage: React.FC = () => {
 
           {/* Product Details */}
           <div>
-            <span className="inline-block px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full mb-4">
+            <span className="inline-block px-3 py-1 text-sm font-medium bg-wine text-white rounded-full mb-4">
               {displayProduct.category}
             </span>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">{displayProduct.name}</h1>
-            <p className="text-2xl font-bold text-blue-600 mb-4">${displayProduct.price.toFixed(2)}</p>
+            <p className="text-2xl font-bold text-wine mb-4">₹ {displayProduct.price.toFixed(2)}</p>
 
             <div className="mb-6">
               <p className="text-gray-700 mb-4">{displayProduct.description}</p>
@@ -258,7 +258,7 @@ const ProductDetailPage: React.FC = () => {
                         key={variant}
                         onClick={() => setSelectedVariant(variant)}
                         className={`px-4 py-2 border text-sm rounded-md ${selectedVariant === variant
-                            ? 'border-blue-600 bg-blue-50 text-blue-600'
+                            ? 'border-blue-600 bg-wine text-white'
                             : 'border-gray-300 text-gray-700 hover:border-gray-400'
                           }`}
                       >

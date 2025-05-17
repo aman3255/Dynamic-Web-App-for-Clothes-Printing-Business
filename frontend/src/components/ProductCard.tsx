@@ -61,14 +61,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
         <div className="p-4">
           <div className="mb-1">
-            <span className="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full mb-2">
+            <span className="inline-block px-2 py-1 text-xs font-medium bg-wine text-white rounded-full mb-2">
               {category}
             </span>
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-1">{name}</h3>
           <p className="text-gray-600 text-sm mb-2 line-clamp-2">{description}</p>
           <div className="flex justify-between items-center mt-2">
-            <span className="text-lg font-bold text-blue-600">${price.toFixed(2)}</span>
+            <span className="text-lg font-bold text-wine">₹ {price.toFixed(2)}</span>
           </div>
         </div>
       </Link>
@@ -82,7 +82,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 onClick={() => setSelectedVariant(variant)}
                 className={`px-2 py-1 text-sm rounded ${
                   selectedVariant === variant
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-wine text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
