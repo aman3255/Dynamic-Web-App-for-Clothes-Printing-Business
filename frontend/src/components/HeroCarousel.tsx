@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade } from 'swiper/modules';
+import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
 import Button from './Button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const slides = [
   {
@@ -33,61 +35,75 @@ const slides = [
   },
 ];
 
-const HeroCarousel: React.FC = () => {
+const HeroCarousel = () => {
   return (
-    <Swiper
-      modules={[Autoplay, EffectFade]}
-      effect="fade"
-      autoplay={{
-        delay: 5000,
-        disableOnInteraction: false,
-      }}
-      loop={true}
-      className="h-[600px]"
-    >
-      {slides.map((slide, index) => (
-        <SwiperSlide key={index}>
-          <div className="relative h-full bg-wine">
-            <div className="absolute inset-0 bg-gradient-to-r from-wine via-wine/80 to-transparent z-10" />
-            <div className="container mx-auto h-full px-4 flex items-center relative z-20">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div className="text-smoke">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                    {slide.title}
-                  </h1>
-                  <p className="text-xl mb-8 text-smoke/90">
-                    {slide.description}
-                  </p>
-                  <Link to={slide.link}>
-                    <Button 
-                      variant="secondary" 
-                      size="lg"
-                      className="bg-smoke text-wine hover:bg-smoke/90"
-                    >
-                      Explore Now
-                    </Button>
-                  </Link>
-                </div>
-                <div className="hidden md:block">
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                    className="w-full h-[500px] object-cover rounded-lg shadow-xl"
-                  />
+    <div className="relative h-[600px]">
+      <Swiper
+        modules={[Autoplay, EffectFade, Navigation]}
+        effect="fade"
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        navigation={{
+          prevEl: '.swiper-button-prev',
+          nextEl: '.swiper-button-next',
+        }}
+        loop={true}
+        className="h-full"
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <div className="relative h-full bg-wine">
+              <div className="absolute inset-0 bg-gradient-to-r from-wine via-wine/80 to-transparent z-10" />
+              <div className="container mx-auto h-full px-4 flex items-center relative z-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                  <div className="text-smoke">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                      {slide.title}
+                    </h1>
+                    <p className="text-xl mb-8 text-smoke/90">
+                      {slide.description}
+                    </p>
+                    <Link to={slide.link}>
+                      <Button 
+                        variant="secondary" 
+                        size="lg"
+                        className="bg-smoke text-wine hover:bg-smoke/90"
+                      >
+                        Explore Now
+                      </Button>
+                    </Link>
+                  </div>
+                  <div className="hidden md:block">
+                    <img
+                      src={slide.image}
+                      alt={slide.title}
+                      className="w-full h-[500px] object-cover rounded-lg shadow-xl"
+                    />
+                  </div>
                 </div>
               </div>
+              <div className="absolute inset-0 z-0">
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="w-full h-full object-cover md:hidden"
+                />
+              </div>
             </div>
-            <div className="absolute inset-0 z-0">
-              <img
-                src={slide.image}
-                alt={slide.title}
-                className="w-full h-full object-cover md:hidden"
-              />
-            </div>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      
+      {/* Custom Navigation Arrows */}
+      <div className="swiper-button-prev absolute left-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-12 h-12 rounded-full bg-wine/70 hover:bg-wine cursor-pointer transition-colors duration-300">
+        <ChevronLeft size={24} className="text-smoke" />
+      </div>
+      <div className="swiper-button-next absolute right-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-12 h-12 rounded-full bg-wine/70 hover:bg-wine cursor-pointer transition-colors duration-300">
+        <ChevronRight size={24} className="text-smoke" />
+      </div>
+    </div>
   );
 };
 

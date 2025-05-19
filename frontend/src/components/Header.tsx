@@ -118,7 +118,7 @@ const Header: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <Link to="/profile" className="flex items-center text-gray-800 hover:text-wine">
                   <User size={20} className="mr-1" />
-                  <span>{user.name}</span>
+                  <span>{user.fullName}</span>
                 </Link>
                 <button
                   onClick={handleLogout}
