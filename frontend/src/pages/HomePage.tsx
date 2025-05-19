@@ -1,9 +1,10 @@
 // import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {  ShoppingBag, Award, PencilRuler } from 'lucide-react';
+import { ShoppingBag, Award, PencilRuler } from 'lucide-react';
 // import api from '../services/api';
 import Button from '../components/Button';
 import HeroCarousel from '../components/HeroCarousel';
+import ChatBot from '../components/ChatBot';
 
 const HomePage: React.FC = () => {
   const categories = [
@@ -148,7 +149,7 @@ const HomePage: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category) => (
-              <div 
+              <div
                 key={category.path}
                 className="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
@@ -163,7 +164,7 @@ const HomePage: React.FC = () => {
                   <h3 className="text-2xl font-bold text-smoke mb-2">{category.name}</h3>
                   <p className="text-smoke/90 mb-4">{category.description}</p>
                   <Link to={category.path}>
-                    <Button 
+                    <Button
                       variant="secondary"
                       className="bg-smoke text-wine hover:bg-smoke/90 transition-colors"
                     >
@@ -184,33 +185,33 @@ const HomePage: React.FC = () => {
             <h2 className="text-3xl font-bold text-wine mb-2">Trusted By Over 350 Large Enterprises</h2>
             <p className="text-wine text-lg">For their Printing, Signage, and Gifting needs</p>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center justify-items-center mb-10">
             {/* Company Logos */}
-            <img src="https://i.pinimg.com/736x/db/19/33/db19332a23a44f772c5a1855a8aabf70.jpg" 
-                alt="Facebook" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
-            
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png" 
-                alt="Microsoft" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
-            
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png" 
-                alt="Google" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
-            
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/2560px-Paytm_Logo_%28standalone%29.svg.png" 
-                alt="Paytm" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
-            
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Uber_App_Icon.svg/2048px-Uber_App_Icon.svg.png" 
-                alt="Uber" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
-            
-            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" 
-                alt="Zaalima" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
-            
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" 
-                alt="Amazon" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
+            <img src="https://i.pinimg.com/736x/db/19/33/db19332a23a44f772c5a1855a8aabf70.jpg"
+              alt="Facebook" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png"
+              alt="Microsoft" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png"
+              alt="Google" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/2560px-Paytm_Logo_%28standalone%29.svg.png"
+              alt="Paytm" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Uber_App_Icon.svg/2048px-Uber_App_Icon.svg.png"
+              alt="Uber" className="h-8 md:h-10 w-auto grayscale hover:grayscale-0 transition-all" />
+
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png"
+              alt="Zaalima" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png"
+              alt="Amazon" className="h-8 md:h-10 w-auto  hover:grayscale-0 transition-all" />
           </div>
-          
+
           <div className="text-center">
-            <Button  size="lg" className="bg-brand-wine hover:bg-opacity-90">
+            <Button size="lg" className="bg-brand-wine hover:bg-opacity-90">
               <Link to="/register">Get in Touch</Link>
             </Button>
           </div>
@@ -276,7 +277,10 @@ const HomePage: React.FC = () => {
           </Link>
         </div>
       </section>
+      {/* Chat Bot */}
+      <ChatBot />
     </div>
+
   );
 };
 
