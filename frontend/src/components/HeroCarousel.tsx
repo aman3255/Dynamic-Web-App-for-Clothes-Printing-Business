@@ -97,10 +97,10 @@ const HeroCarousel = () => {
       </Swiper>
       
       {/* Custom Navigation Arrows */}
-      <div className="swiper-button-prev absolute left-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-12 h-12 rounded-full bg-wine/70 hover:bg-wine cursor-pointer transition-colors duration-300">
+      <div className=" absolute left-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-12 h-12 rounded-full bg-wine/70 hover:bg-wine cursor-pointer transition-colors duration-300">
         <ChevronLeft size={24} className="text-smoke" />
       </div>
-      <div className="swiper-button-next absolute right-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-12 h-12 rounded-full bg-wine/70 hover:bg-wine cursor-pointer transition-colors duration-300">
+      <div className=" absolute right-4 top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-12 h-12 rounded-full bg-wine/70 hover:bg-wine cursor-pointer transition-colors duration-300">
         <ChevronRight size={24} className="text-smoke" />
       </div>
     </div>
