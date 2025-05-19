@@ -384,15 +384,16 @@ const ProductsPage: React.FC = () => {
                     max="100"
                     value={priceRange[0]}
                     onChange={(e) => handlePriceChange(0, parseInt(e.target.value))}
-                    className="w-full"
+                    className="w-full accent-wine"
                   />
+
                   <input
                     type="range"
                     min="0"
                     max="100"
                     value={priceRange[1]}
                     onChange={(e) => handlePriceChange(1, parseInt(e.target.value))}
-                    className="w-full"
+                    className="w-full accent-wine"
                   />
                 </div>
                 <div className="flex justify-between">
