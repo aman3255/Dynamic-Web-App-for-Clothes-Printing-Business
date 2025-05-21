@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
@@ -14,9 +15,9 @@ import CheckoutPage from './pages/CheckoutPage';
 import OrdersPage from './pages/OrdersPage';
 import OrderDetailPage from './pages/OrderDetailPage';
 import ProfilePage from './pages/ProfilePage';
+import AdminLoginPage from './pages/AdminLoginPage';
+import VendorLoginPage from './pages/VendorLoginPage';
 import PrivateRoute from './components/PrivateRoute';
-import HowItWorks from './pages/HowItWorks';
-//
 
 function App() {
   return (
@@ -32,40 +33,41 @@ function App() {
                 <Route path="/products/:category" element={<ProductsPage />} />
                 <Route path="/product/:id" element={<ProductDetailPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/admin/login" element={<AdminLoginPage />} />
+                <Route path="/vendor/login" element={<VendorLoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/cart" element={<CartPage />} />
-                <Route path="/HowItWorks" element={<HowItWorks />} />
-                <Route 
-                  path="/checkout" 
+                <Route
+                  path="/checkout"
                   element={
                     <PrivateRoute>
                       <CheckoutPage />
                     </PrivateRoute>
-                  } 
+                  }
                 />
-                <Route 
-                  path="/orders" 
+                <Route
+                  path="/orders"
                   element={
                     <PrivateRoute>
                       <OrdersPage />
                     </PrivateRoute>
-                  } 
+                  }
                 />
-                <Route 
-                  path="/orders/:id" 
+                <Route
+                  path="/orders/:id"
                   element={
                     <PrivateRoute>
                       <OrderDetailPage />
                     </PrivateRoute>
-                  } 
+                  }
                 />
-                <Route 
-                  path="/profile" 
+                <Route
+                  path="/profile"
                   element={
                     <PrivateRoute>
                       <ProfilePage />
                     </PrivateRoute>
-                  } 
+                  }
                 />
               </Routes>
             </main>
@@ -75,7 +77,6 @@ function App() {
         </CartProvider>
       </AuthProvider>
     </Router>
-    
   );
 }
 

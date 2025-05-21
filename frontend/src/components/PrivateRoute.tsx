@@ -1,13 +1,15 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 interface PrivateRouteProps {
   children: React.ReactNode;
+  requiredRole?: 'admin' | 'vendor' | 'customer';
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, requiredRole }) => {
   const { user, loading } = useAuth();
+  const location = useLocation();
 
   if (loading) {
     return (
@@ -18,7 +20,19 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   }
 
   if (!user) {
-    return <Navigate to="/login" />;
+    // Redirect to appropriate login page based on the required role
+    const loginPath = requiredRole === 'admin' 
+      ? '/admin/login'
+      : requiredRole === 'vendor'
+      ? '/vendor/login'
+      : '/login';
+    
+    return <Navigate to={loginPath} state={{ from: location }} />;
+  }
+
+  // Check if user has the required role
+  if (requiredRole && user.role !== requiredRole) {
+    return <Navigate to="/" />;
   }
 
   return <>{children}</>;
