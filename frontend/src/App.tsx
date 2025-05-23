@@ -18,6 +18,7 @@ import ProfilePage from './pages/ProfilePage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import VendorLoginPage from './pages/VendorLoginPage';
 import PrivateRoute from './components/PrivateRoute';
+import HowItWorks from './pages/HowItWorks';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/vendor/login" element={<VendorLoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/HowItWorks" element={<HowItWorks />} />
                 <Route
                   path="/checkout"
                   element={

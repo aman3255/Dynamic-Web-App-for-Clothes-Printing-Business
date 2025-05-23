@@ -4,7 +4,7 @@ import { ShoppingCart, User, Menu, X, Search, LogOut } from 'lucide-react';
 import { Input } from "../contexts/InputContext";
 import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
-// import HowItWorks from '../pages/HowItWorks';
+import HowItWorks from '../pages/HowItWorks';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
