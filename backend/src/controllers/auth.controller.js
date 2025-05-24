@@ -4,49 +4,66 @@ const bcrypt = require('bcrypt');
 const { SignupValidation, SigninValidation } = require('./../service/auth.service')
 const { generateToken, tokenCache } = require('./../service/jwt.service');
 
-
 const SignupController = async (req, res) => {
     try {
         console.log('SignupController');
-        const { fullName, email, password, addresses, phone } = req.body;
+        const { fullName, email, password, addresses, phone, role = 'customer' } = req.body;
+        
         // === Validation ===================================================
         SignupValidation(req.body);
         // ==================================================================
 
         // ====== Check if user exists ====================================
-        const existingUser = await UserModel.findOne({ email, phone });
+        const existingUser = await UserModel.findOne({ 
+            $or: [
+                { email: email },
+                { phone: phone }
+            ]
+        });
+        
         if (existingUser) {
-            return res.status(404).json({ message: 'User already exists with this email and phone number procedd to signin.' });
+            return res.status(409).json({ 
+                success: false,
+                message: 'User already exists with this email or phone number. Please proceed to signin.' 
+            });
         }
         // ====================================================
+
+        // ====== Validate role =========================================
+        const validRoles = ['customer', 'admin', 'vendor'];
+        if (!validRoles.includes(role)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid role specified'
+            });
+        }
+        // ========================================================
 
         // ====== Hash Password =========================================
         const hashedPassword = await bcrypt.hash(password, 10);
         // ========================================================
-        // console.log('hashedPassword', hashedPassword);
 
         // ===== Create User =========================================
         const newUser = await UserModel.create({
             fullName,
             email,
             password: hashedPassword,
-            addresses,
-            phone
-        })
-        // await newUser.save();
+            addresses: addresses || [],
+            phone,
+            role
+        });
         // ========================================================
-        // console.log('newUser', newUser);
+
         // ============ Calling generateToken ==========================
-        const tokenRespone = generateToken(
+        const tokenResponse = generateToken(
             newUser._id,
             newUser.email,
-            newUser.phone
+            newUser.phone,
+            newUser.role
         );
         // =============================================================
-        // console.log('tokenRespone', tokenRespone);
 
         // ============ Sending Response ==========================
-
         return res.status(201).json({
             success: true,
             message: 'Account successfully created.',
@@ -55,8 +72,9 @@ const SignupController = async (req, res) => {
                     id: newUser._id,
                     fullName: newUser.fullName,
                     email: newUser.email,
+                    role: newUser.role
                 },
-                accessToken: tokenRespone
+                accessToken: tokenResponse
             }
         });
         // ========================================================
@@ -66,40 +84,69 @@ const SignupController = async (req, res) => {
             success: false,
             message: "An unexpected error occurred during registration. Please try again later.",
             error: error.message
-        })
+        });
     }
 }
 
 const SigninController = async (req, res) => {
     try {
-
-        const { email, phone, password } = req.body;
+        const { email, password, role } = req.body;
 
         // === Validation ===================================
         SigninValidation(req.body);
 
         // === Check if user exists =========================
-        const existingUser = await UserModel.findOne({ email, phone });
+        const existingUser = await UserModel.findOne({ email: email });
         if (!existingUser) {
             return res.status(404).json({
-                message: 'User does not exist with this email & phone number. Please sign up first.'
+                success: false,
+                message: 'User does not exist with this email. Please sign up first.'
+            });
+        }
+
+        // === Check if user is active ======================
+        if (!existingUser.isActive) {
+            return res.status(403).json({
+                success: false,
+                message: 'Account is deactivated. Please contact support.'
+            });
+        }
+
+        // === Check role match =============================
+        if (role && existingUser.role !== role) {
+            return res.status(403).json({
+                success: false,
+                message: `Access denied. You don't have ${role} privileges.`
             });
         }
 
         // === Check password ===============================
         const isPasswordValid = await bcrypt.compare(password, existingUser.password);
         if (!isPasswordValid) {
-            return res.status(401).json({ message: 'Incorrect password. Please try again.' });
+            return res.status(401).json({ 
+                success: false,
+                message: 'Incorrect password. Please try again.' 
+            });
         }
 
         // === Token cache check ============================
-        const cachedToken = tokenCache.get(email);
+        const cacheKey = `${email}_${existingUser.role}`;
+        const cachedToken = tokenCache.get(cacheKey);
         let token;
+        
         if (cachedToken && cachedToken.expiresAt > Date.now()) {
             token = cachedToken.token; // Reuse cached token
         } else {
-            token = generateToken(existingUser._id, existingUser.email, existingUser.phone);
-            tokenCache.set(email, { token, expiresAt: Date.now() + 3600000 });
+            token = generateToken(
+                existingUser._id, 
+                existingUser.email, 
+                existingUser.phone,
+                existingUser.role
+            );
+            tokenCache.set(cacheKey, { 
+                token, 
+                expiresAt: Date.now() + 3600000 // 1 hour
+            });
         }
 
         // === Response =====================================
@@ -111,25 +158,29 @@ const SigninController = async (req, res) => {
                     id: existingUser._id,
                     fullName: existingUser.fullName,
                     email: existingUser.email,
+                    role: existingUser.role
                 },
                 accessToken: token
             }
         });
 
     } catch (error) {
+        console.error(`Error during login: ${error.message}`);
         return res.status(error.statusCode || 500).json({
             success: false,
-            message: `An unexpected error occurred during login. Please try again later: ${error.message}`,
+            message: `An unexpected error occurred during login. Please try again later.`,
             error: error.message
         });
     }
 };
 
-// New controller to get current user information based on token
+// Get current user information based on token
 const GetCurrentUserController = async (req, res) => {
     try {
         // The user information is already attached to the request by the authenticateToken middleware
-        const user = req.user;
+        const userId = req.user.id || req.user.userId;
+        
+        const user = await UserModel.findById(userId).select('-password');
         
         if (!user) {
             return res.status(404).json({
@@ -143,9 +194,13 @@ const GetCurrentUserController = async (req, res) => {
             message: 'User data retrieved successfully',
             data: {
                 user: {
-                    id: user.id,
+                    id: user._id,
                     fullName: user.fullName,
-                    email: user.email
+                    email: user.email,
+                    role: user.role,
+                    phone: user.phone,
+                    addresses: user.addresses,
+                    createdAt: user.createdAt
                 }
             }
         });
@@ -159,9 +214,25 @@ const GetCurrentUserController = async (req, res) => {
     }
 };
 
+// Role-based access control helper
+const checkRole = (allowedRoles) => {
+    return (req, res, next) => {
+        const userRole = req.user.role;
+        
+        if (!allowedRoles.includes(userRole)) {
+            return res.status(403).json({
+                success: false,
+                message: 'Access denied. Insufficient privileges.'
+            });
+        }
+        
+        next();
+    };
+};
 
 module.exports = {
     SignupController,
     SigninController,
-    GetCurrentUserController
-}
+    GetCurrentUserController,
+    checkRole
+};
