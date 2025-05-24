@@ -1,59 +1,115 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-// Simple in-memory token cache
+// Token cache to store active tokens
 const tokenCache = new Map();
 
-/**
- * Generates a JWT token for a user
- * @param {string} userId - User ID
- * @param {string} email - User email
- * @param {string} phone - User phone
- * @returns {string} JWT token
- */
-const generateToken = (userId, email, phone) => {
+const generateToken = (userId, email, phone = null, role = 'customer') => {
     try {
         const payload = {
-            userId,
-            email,
-            phone
+            userId: userId,
+            email: email,
+            phone: phone,
+            role: role,
+            iat: Math.floor(Date.now() / 1000),
+            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24) // 24 hours
         };
-        
-        // Get JWT secret from environment variables or use a default (for development only)
-        const jwtSecret = process.env.DEV_JWT_SECRET_KEY || 'your-default-secret-key';
-        
-        // Set token expiration (1 hour)
-        const options = {
-            expiresIn: '1h'
-        };
-        
-        // Generate and return token
-        const token = jwt.sign(payload, jwtSecret, options);
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+            algorithm: 'HS256'
+        });
+
         return token;
     } catch (error) {
-        console.error(`Error generating token: ${error.message}`);
-        throw new Error('Failed to generate authentication token');
+        console.error('Error generating token:', error);
+        throw new Error('Token generation failed');
     }
 };
 
-/**
- * Verifies a JWT token
- * @param {string} token - JWT token to verify
- * @returns {Object} Decoded token payload
- */
 const verifyToken = (token) => {
     try {
-        const jwtSecret = process.env.DEV_JWT_SECRET_KEY || 'your-default-secret-key';
-        const decoded = jwt.verify(token, jwtSecret);
-        return decoded;
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        return {
+            success: true,
+            data: decoded
+        };
     } catch (error) {
-        console.error(`Token verification error: ${error.message}`);
-        throw new Error('Invalid or expired token');
+        console.error('Token verification failed:', error.message);
+        return {
+            success: false,
+            error: error.message
+        };
     }
 };
+
+const refreshToken = (oldToken) => {
+    try {
+        const decoded = jwt.verify(oldToken, process.env.JWT_SECRET, { ignoreExpiration: true });
+        
+        // Check if token is within refresh window (e.g., 7 days from expiration)
+        const now = Math.floor(Date.now() / 1000);
+        const refreshWindow = 7 * 24 * 60 * 60; // 7 days in seconds
+        
+        if (now - decoded.exp > refreshWindow) {
+            throw new Error('Token too old to refresh');
+        }
+
+        // Generate new token with same payload but new expiration
+        return generateToken(decoded.userId, decoded.email, decoded.phone, decoded.role);
+    } catch (error) {
+        console.error('Token refresh failed:', error.message);
+        throw new Error('Token refresh failed');
+    }
+};
+
+const blacklistToken = (token) => {
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET, { ignoreExpiration: true });
+        const blacklistKey = `blacklist_${decoded.userId}_${decoded.iat}`;
+        
+        // Store in cache with expiration time matching original token
+        tokenCache.set(blacklistKey, {
+            blacklisted: true,
+            expiresAt: decoded.exp * 1000
+        });
+        
+        return true;
+    } catch (error) {
+        console.error('Error blacklisting token:', error);
+        return false;
+    }
+};
+
+const isTokenBlacklisted = (token) => {
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET, { ignoreExpiration: true });
+        const blacklistKey = `blacklist_${decoded.userId}_${decoded.iat}`;
+        
+        const blacklistedToken = tokenCache.get(blacklistKey);
+        return blacklistedToken && blacklistedToken.blacklisted === true;
+    } catch (error) {
+        return false;
+    }
+};
+
+// Clean up expired tokens from cache
+const cleanupExpiredTokens = () => {
+    const now = Date.now();
+    for (const [key, value] of tokenCache.entries()) {
+        if (value.expiresAt && value.expiresAt < now) {
+            tokenCache.delete(key);
+        }
+    }
+};
+
+// Run cleanup every hour
+setInterval(cleanupExpiredTokens, 60 * 60 * 1000);
 
 module.exports = {
     generateToken,
     verifyToken,
+    refreshToken,
+    blacklistToken,
+    isTokenBlacklisted,
     tokenCache
 };
