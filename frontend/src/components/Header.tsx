@@ -4,7 +4,6 @@ import { ShoppingCart, User, Menu, X, Search, LogOut } from 'lucide-react';
 import { Input } from "../contexts/InputContext";
 import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
-import HowItWorks from '../pages/HowItWorks';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -118,7 +117,7 @@ const Header: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <Link to="/profile" className="flex items-center text-gray-800 hover:text-wine">
                   <User size={20} className="mr-1" />
-                  <span>{user.fullName}</span>
+                  <span>{user.name}</span>
                 </Link>
                 <button
                   onClick={handleLogout}

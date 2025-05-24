@@ -8,8 +8,8 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        required: true,
         unique: true,
-        sparse: true, // Allows email to be optional if using phone
         lowercase: true,
         trim: true,
         match: [/.+\@.+\..+/, 'Please enter a valid email address']
@@ -17,20 +17,34 @@ const UserSchema = new mongoose.Schema({
     phone: {
         type: String,
         unique: true,
-        sparse: true, // Allows phone to be optional if using email
+        sparse: true, // Optional field
         match: [/^\d{10}$/, 'Please enter a valid 10-digit phone number']
     },
     password: {
         type: String,
-        minlength: 6 // Optional for OTP-based phone login
+        required: true,
+        minlength: 6
+    },
+    role: {
+        type: String,
+        enum: ['customer', 'admin', 'vendor'],
+        default: 'customer'
     },
     addresses: [{
         type: String,
         default: []
-    }]
+    }],
+    isActive: {
+        type: Boolean,
+        default: true
+    }
 }, {
     timestamps: true
 });
+
+// Create indexes for better performance
+UserSchema.index({ email: 1 });
+UserSchema.index({ role: 1 });
 
 const UserModel = mongoose.model('users', UserSchema);
 
