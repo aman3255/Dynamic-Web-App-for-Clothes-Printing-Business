@@ -15,7 +15,7 @@ interface AuthContextType {
   loading: boolean;
   error: string | null;
   login: (email: string, password: string, role: 'admin' | 'vendor' | 'customer') => Promise<void>;
-  register: (name: string, email: string, password: string) => Promise<void>;
+  register: (name: string, email: string, password: string, phone: string) => Promise<void>;
   logout: () => void;
   clearError: () => void;
 }
@@ -64,7 +64,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     checkAuth();
   }, []);
 
-  const login = async (email: string, password: string, role: 'admin' | 'vendor' | 'customer') => {
+  const login = async (
+    email: string,
+    password: string,
+    role: 'admin' | 'vendor' | 'customer'
+  ) => {
     try {
       setLoading(true);
       setError(null);
@@ -95,12 +99,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const register = async (name: string, email: string, password: string) => {
+  const register = async (
+    name: string,
+    email: string,
+    password: string,
+    phone: string
+  ) => {
     try {
       setLoading(true);
       setError(null);
 
-      const response = await api.post('/auth/register', { name, email, password });
+      // Send phone as well in the registration request
+      const response = await api.post('/auth/register', { name, email, password, phone });
       const { token, user } = response.data;
 
       localStorage.setItem('token', token);
