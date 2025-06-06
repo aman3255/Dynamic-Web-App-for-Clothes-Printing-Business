@@ -21,12 +21,13 @@ const SignupController = async (req, res) => {
             ]
         });
         
-        if (existingUser) {
-            return res.status(409).json({ 
+        if (role && existingUser.role !== role) {
+            return res.status(403).json({
                 success: false,
-                message: 'User already exists with this email or phone number. Please proceed to signin.' 
+                message: `Access denied. You don't have ${role} privileges.`
             });
         }
+        
         // ====================================================
 
         // ====== Validate role =========================================
